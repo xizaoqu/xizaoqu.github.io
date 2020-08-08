@@ -27,15 +27,15 @@
 <meta property="og:site_name" content="肖泽琪的博客">
 <meta property="og:description" content="坏了，今天任务又得拖。 参考文献:On finding gray pixels -CVPR19 分别将所有选定像素的前两维、后两维和[0 1 0]的前两维、后两维相乘。得到二维点图用以聚类。 1.将选取的pixel从三维降至二维，算法为分别计算所选pixel一二通道、二三通道和groudtruth一二通道、二三通道的角误差。这次groudtruth均使用[0 1 0]。2.将二维pixel聚类，并">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="file:///C://Users/14314/Desktop/颜色恒常性/6.png">
+<meta property="og:image" content="http://xizaoqu.github.io/2020/08/06/%E9%A2%9C%E8%89%B2%E6%81%92%E5%B8%B8%E6%80%A7/6.png">
 <meta property="article:published_time" content="2020-08-06T15:31:31.000Z">
-<meta property="article:modified_time" content="2020-08-08T02:56:52.467Z">
+<meta property="article:modified_time" content="2020-08-08T08:42:39.611Z">
 <meta property="article:author" content="肖泽琪">
 <meta property="article:tag" content="python">
 <meta property="article:tag" content="matlab">
 <meta property="article:tag" content="colorcontancy">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="file:///C://Users/14314/Desktop/颜色恒常性/6.png">
+<meta name="twitter:image" content="http://xizaoqu.github.io/2020/08/06/%E9%A2%9C%E8%89%B2%E6%81%92%E5%B8%B8%E6%80%A7/6.png">
 
 <link rel="canonical" href="http://xizaoqu.github.io/2020/08/06/%E9%A2%9C%E8%89%B2%E6%81%92%E5%B8%B8%E6%80%A7/">
 
@@ -202,7 +202,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-08-08 10:56:52" itemprop="dateModified" datetime="2020-08-08T10:56:52+08:00">2020-08-08</time>
+                <time title="修改时间：2020-08-08 16:42:39" itemprop="dateModified" datetime="2020-08-08T16:42:39+08:00">2020-08-08</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -227,7 +227,7 @@
       
         <p>坏了，今天任务又得拖。</p>
 <p>参考文献:<br><a href="file:///C:/Users/14314/Desktop/颜色恒常性/Onfindinggraypixels-CVPR19.pdf">On finding gray pixels -CVPR19</a></p>
-<p>分别将所有选定像素的前两维、后两维和[0 1 0]的前两维、后两维相乘。得到二维点图用以聚类。<br><img src="file:///C://Users/14314/Desktop/颜色恒常性/6.png" alt="聚类示例"></p>
+<p>分别将所有选定像素的前两维、后两维和[0 1 0]的前两维、后两维相乘。得到二维点图用以聚类。<br><img src="/2020/08/06/%E9%A2%9C%E8%89%B2%E6%81%92%E5%B8%B8%E6%80%A7/6.png" alt="aa"></p>
 <p>1.将选取的pixel从三维降至二维，算法为分别计算所选pixel一二通道、二三通道和groudtruth一二通道、二三通道的角误差。这次groudtruth均使用[0 1 0]。<br>2.将二维pixel聚类，并删除离聚类较远的噪点。<br>3.对于每一个聚类求平均值作为待选光源。<br>4.假如待选光源为1，直接使用GI算法，假如待选光源大于1，结合weightedGE算法从待选光源中选取光源作为最终结果。<br>在canon1D86张照片上测试结果如下<br>            my            GI<br>mean        3.395379    3.320795<br>median        1.822142    1.938861<br>best25%        0.52677        0.544303<br>worst25%    7.313918    6.84835<br>对比可知，一通操作下来结果并没有变理想。<br>分析数据发现，误差较大的情况来自于<br>1）结合weightedGE算法在某些图片上误差很大，假如刚好此时备选光源大于1，且其中一种光源误差很大，且接近weightedGE的光源，则反而会使得最终误差变大。<br>2）备选光源等于1，且本身误差较大。<br>3）备选光源大于1，每一个备选光源均有一定误差，但结合在一起误差反而变小，此时不管取哪个光源都会产生更大误差。<br>总结起来，GI算法本身效果较好，但在小部分图片上误差很大。近段时间的目标针对在解决小部分图片的问题上。由于大部分图片的备选光源都包括非常接近GroundTruth的光源，因此希望找到选取出此光源的方法。</p>
 
     </div>
