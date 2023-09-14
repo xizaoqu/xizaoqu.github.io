@@ -204,7 +204,64 @@
       </div>
       <!--/ Pipeline -->
 
-      <!-- Re-rendering. -->
+      <!-- Multi-step. -->
+      <h3 class="title is-4">Diverse Interactions with the Same Object</h3>
+      <div class="content has-text-justified">
+        <p>
+          Using <span class="dnerf">UniHSI</span>, we can control humanoids to perform diverse interactions with the same object following different language prompts.
+        </p>
+      </div>
+      <div class="content has-text-centered">
+        <video id="replay-video"
+               controls
+               muted
+               preload
+               playsinline
+               width="75%">
+          <source src="./static/videos/multistep_sit_demo.mp4"
+                  type="video/mp4">
+        </video>
+      </div>
+      <!--/ Multi-step. -->
+      </div>
+
+      <!-- Visual Effects. -->
+      <div class="column">
+        <div class="content">
+          <h2 class="title is-3">Visual Effects</h2>
+          <p>
+            Using <i>nerfies</i> you can create fun visual effects. This Dolly zoom effect
+            would be impossible without nerfies since it would require going through a wall.
+          </p>
+          <video id="dollyzoom" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/multiobj_multistep_1.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+      </div>
+      <!--/ Visual Effects. -->
+
+      <!-- Matting. -->
+      <div class="column">
+        <h2 class="title is-3">Matting</h2>
+        <div class="columns is-centered">
+          <div class="column content">
+            <p>
+              As a byproduct of our method, we can also solve the matting problem by ignoring
+              samples that fall outside of a bounding box during rendering.
+            </p>
+            <video id="matting-video" controls playsinline height="100%">
+              <source src="./static/videos/multiobj_multistep_2.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <!--/ Matting. -->
+  
+      <!-- Multi-agent. -->
       <h3 class="title is-4">''Multi-agent'' Interaction Planned by LLMs</h3>
       <div class="content has-text-justified">
         <p>
@@ -223,7 +280,7 @@
                   type="video/mp4">
         </video>
       </div>
-      <!--/ Re-rendering. -->
+      <!--/ Multi-agent. -->
       </div>
     </div>
   
@@ -266,7 +323,7 @@
     <h2 class="title">BibTeX</h2>
     <pre><code>@article{park2021nerfies,
   author    = {Xiao, Zeqi and Wang, Tai and Wang, Jingbo and Cao, Jinkun and Dai, Bo and Lin, Dahua and Pang, Jiangmiao},
-  title     = {UniHSI: Unified Human-Scene Interaction via Prompted Chain-of-Contacts},
+  title     = {Unified Human-Scene Interaction via Prompted Chain-of-Contacts},
   journal   = {Arxiv},
   year      = {2023},
 }</code></pre>
@@ -289,7 +346,7 @@
       <div class="column is-8">
         <div class="content">
           <p>
-            This page was built using the<a href="https://github.com/eliahuhorwitz/Academic-project-page-template/">Academic Project Page Template</a>
+            This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template/">Academic Project Page Template</a>
             which was adopted from the <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a> project page.
           </p>
           <script type="text/javascript" src="//rf.revolvermaps.com/0/0/8.js?i=5x18u1vl8d4&amp;m=0&amp;c=ff0000&amp;cr1=ffffff&amp;f=arial&amp;l=33" async="async"></script>
