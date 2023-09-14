@@ -206,62 +206,6 @@ Based on the definition, UniHSI constitutes a <b>Large Language Model (LLM) Plan
       </div>
       <!--/ Pipeline -->
 
-      <!-- Multi-step. -->
-      <h3 class="title is-4">Diverse Interactions with the Same Object</h3>
-      <div class="content has-text-justified">
-        <p>
-          Using <span class="dnerf">UniHSI</span>, we can control humanoids to perform diverse interactions with the same object following different language prompts.
-        </p>
-      </div>
-      <div class="content has-text-centered">
-        <video id="replay-video"
-               controls
-               muted
-               preload
-               playsinline
-               width="75%">
-          <source src="./static/videos/multistep_sit_demo.mp4"
-                  type="video/mp4">
-        </video>
-      </div>
-      <!--/ Multi-step. -->
-      </div>
-
-      <!-- Visual Effects. -->
-      <div class="column">
-        <div class="content">
-          <h2 class="title is-3">Visual Effects</h2>
-          <p>
-            Using <i>nerfies</i> you can create fun visual effects. This Dolly zoom effect
-            would be impossible without nerfies since it would require going through a wall.
-          </p>
-          <video id="dollyzoom" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/multiobj_multistep_1.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-      </div>
-      <!--/ Visual Effects. -->
-
-      <!-- Matting. -->
-      <div class="column">
-        <h2 class="title is-3">Matting</h2>
-        <div class="columns is-centered">
-          <div class="column content">
-            <p>
-              As a byproduct of our method, we can also solve the matting problem by ignoring
-              samples that fall outside of a bounding box during rendering.
-            </p>
-            <video id="matting-video" controls playsinline height="100%">
-              <source src="./static/videos/multiobj_multistep_2.mp4"
-                      type="video/mp4">
-            </video>
-          </div>
-
-        </div>
-      </div>
-    </div>
-    <!--/ Matting. -->
   
       <!-- Multi-agent. -->
       <h3 class="title is-4">''Multi-agent'' Interaction Planned by LLMs</h3>
@@ -298,11 +242,7 @@ Based on the definition, UniHSI constitutes a <b>Large Language Model (LLM) Plan
         <!-- Visual Effects. -->
         <div class="column">
           <div class="content">
-            <h2 class="title is-3">Visual Effects</h2>
-            <p>
-              Using <i>nerfies</i> you can create fun visual effects. This Dolly zoom effect
-              would be impossible without nerfies since it would require going through a wall.
-            </p>
+            <h2 class="title is-3">Multiobjects</h2>
             <video id="dollyzoom" autoplay controls muted loop playsinline height="100%">
               <source src="./static/videos/multiobj_multistep_1.mp4"
                       type="video/mp4">
@@ -313,13 +253,8 @@ Based on the definition, UniHSI constitutes a <b>Large Language Model (LLM) Plan
   
         <!-- Matting. -->
         <div class="column">
-          <h2 class="title is-3">Matting</h2>
           <div class="columns is-centered">
             <div class="column content">
-              <p>
-                As a byproduct of our method, we can also solve the matting problem by ignoring
-                samples that fall outside of a bounding box during rendering.
-              </p>
               <video id="matting-video" controls playsinline height="100%">
                 <source src="./static/videos/multiobj_multistep_2.mp4"
                         type="video/mp4">
@@ -336,6 +271,71 @@ Based on the definition, UniHSI constitutes a <b>Large Language Model (LLM) Plan
     </div>
   </section>
 
+  <section class="section">
+    <div class="container is-max-desktop">
+  
+      <div class="columns is-centered">
+  
+        <!-- Visual Effects. -->
+        <div class="column">
+          <div class="content">
+            <h2 class="title is-3">Diverse Interactions with the Same Object</h2>
+            <video id="dollyzoom" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/multistep_sit_demo.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+        </div>
+        <!--/ Visual Effects. -->
+  
+        <!-- Matting. -->
+        <div class="column">
+          <div class="columns is-centered">
+            <div class="column content">
+              <video id="matting-video" controls playsinline height="100%">
+                <source src="./static/videos/multistep_bed_demo.mp4"
+                        type="video/mp4">
+              </video>
+            </div>
+  
+          </div>
+        </div>
+      </div>
+      <!--/ Matting. -->
+  
+
+  
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container is-max-desktop">
+  
+      <!-- Multi-agent. -->
+      <h3 class="title is-4">''Multi-agent'' Interaction Planned by LLMs</h3>
+      <div class="content has-text-justified">
+        <p>
+          Using <span class="dnerf">UniHSI</span>, we use LLMs to plan and control multi-agent interaction and synthesis interesting videos. 
+          Note: the ''multi-agent interaction'' can be just fulfilled at the commands level at the current stage.
+        </p>
+      </div>
+      <div class="content has-text-centered">
+        <video id="replay-video"
+               controls
+               muted
+               preload
+               playsinline
+               width="75%">
+          <source src="./static/videos/scannet_two_bed_demo.mp4"
+                  type="video/mp4">
+        </video>
+      </div>
+      <!--/ Multi-agent. -->
+  
+
+  
+    </div>
+  </section>
 
 <section class="section" id="BibTeX">
   <div class="container is-max-desktop content">
