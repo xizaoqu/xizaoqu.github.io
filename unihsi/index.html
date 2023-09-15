@@ -84,7 +84,7 @@
             <div class="publication-links">
               <!-- PDF Link. -->
               <span class="link-block">
-                <a href="https://arxiv.org/pdf/2011.12948"
+                <a href="https://arxiv.org/pdf/2309.07918.pdf"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="fas fa-file-pdf"></i>
@@ -93,7 +93,7 @@
                 </a>
               </span>
               <span class="link-block">
-                <a href="https://arxiv.org/abs/2011.12948"
+                <a href=https://arxiv.org/abs/2309.07918"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="ai ai-arxiv"></i>
@@ -144,10 +144,10 @@
         <source src="./static/videos/teaser.mp4"
                 type="video/mp4">
       </video>
-      <h2 class="subtitle has-text-centered">
-        <span class="dnerf">UniHSI</span> supports versatile interactions following language commands.
-      </h2>
     </div>
+      <h2 class="subtitle has-text-centered">
+        <span class="dnerf">UniHSI</span> supports unified and long-horizon control following language commands, enjoying impressive features like fine-granularity control, diverse interactions with the same object, and multi-obj interaction.
+        </h2>
   </div>
 </section>
 
@@ -186,15 +186,20 @@ Based on the definition, UniHSI constitutes a <b>Large Language Model (LLM) Plan
   <div class="container is-max-desktop">
 
       <!-- Pipeline -->
+      <div class="columns is-centered has-text-centered">
       <h3 class="title is-4">Framework Pipeline</h3>
+      </div>
       <div class="content has-text-centered">
         <img width="75%" src="./static/images/main_figure.jpg"">
       </div>
+
+    <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
-      <p>
-        The whole pipeline consists of two major components: the LLM Planner and the Unified Controller. The LLM planner takes language inputs and background scenario information as inputs and outputs multi-step plan in the form of a Chain of Contacts. The Unified Controller then executes task plans step-by-step and output interaction movements.
-      </p>
+        <div class="content has-text-justified">
+ The whole pipeline consists of two major components: the LLM Planner and the Unified Controller. The LLM planner takes language inputs and background scenario information as inputs and outputs multi-step plans in the form of a Chain of Contacts. The Unified Controller then executes task plans step-by-step and outputs interaction movements.
+        </div>
       </div>
+    </div>
       <div class="content has-text-centered">
         <video id="replay-video"
                controls
@@ -220,7 +225,7 @@ Based on the definition, UniHSI constitutes a <b>Large Language Model (LLM) Plan
 <section class="section">
     <div class="container is-max-desktop">
 
-      <h3 class="title is-4">Multiobjects</h3>
+      <h3 class="title is-4">Multi-objects Interaction</h3>
       <div class="columns is-centered">
         <!-- Visual Effects. -->
         <div class="column">
@@ -321,7 +326,7 @@ Based on the definition, UniHSI constitutes a <b>Large Language Model (LLM) Plan
 <section class="section" id="BibTeX">
   <div class="container is-max-desktop content">
     <h2 class="title">BibTeX</h2>
-    <pre><code>@article{park2021nerfies,
+    <pre><code>@article{xiao2023unified,
   author    = {Xiao, Zeqi and Wang, Tai and Wang, Jingbo and Cao, Jinkun and Dai, Bo and Lin, Dahua and Pang, Jiangmiao},
   title     = {Unified Human-Scene Interaction via Prompted Chain-of-Contacts},
   journal   = {Arxiv},
@@ -335,10 +340,10 @@ Based on the definition, UniHSI constitutes a <b>Large Language Model (LLM) Plan
   <div class="container">
     <div class="content has-text-centered">
       <a class="icon-link"
-         href="./static/videos/nerfies_paper.pdf">
+         href="https://arxiv.org/pdf/2309.07918.pdf">
         <i class="fas fa-file-pdf"></i>
       </a>
-      <a class="icon-link" href="https://github.com/keunhong" class="external-link" disabled>
+      <a class="icon-link" href="https://github.com/OpenRobotLab/UniHSI" class="external-link" disabled>
         <i class="fab fa-github"></i>
       </a>
     </div>
