@@ -1,0 +1,437 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>MOFT</title>
+<link href="./DreamBooth_files/style.css" rel="stylesheet">
+<script type="text/javascript" src="./DreamBooth_files/jquery.mlens-1.0.min.js"></script> 
+<script type="text/javascript" src="./DreamBooth_files/jquery.js"></script>
+</head>
+
+<body>
+<div class="content">
+  <h1><strong>Video Diffusion Models are Training-free Motion Interpreter and Controlle</strong></h1>
+  <p id="authors"><span><a href="https://natanielruiz.github.io/"></a></span>
+              <a href="https://github.com/xizaoqu">Zeqi Xiao<sup>1</sup></a	>
+              <a href="https://zhouyifan.net/about/">Yifan Zhou<sup>1</sup></a>
+              <a href="https://williamyang1991.github.io/">Shuai Yang<sup>2</sup></a>
+              <a href="https://xingangpan.github.io/">Xingang Pan<sup>1</sup></a><br>
+    <br>
+  <span style="font-size: 24px"><sup>1</sup>Nanyang Technological University, <sup>2</sup>Peking University
+  </span></p>
+  <br>
+  <img src="./static/paper/teaser.jpg" class="teaser-gif" style="width:80%;"><br>
+  <h3 style="text-align:center"><em>MOtion FeaTure (MOFT) serves as video motion interpreter as well as guidance for motion control.</em></h3>
+    <font size="+2">
+          <p style="text-align: center;">
+            <a href="" target="_blank">[Paper]</a> &nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="" target="_blank">[BibTeX]</a>
+          </p>
+    </font>
+</div>
+<div class="content">
+  <h2 style="text-align:center;">Abstract</h2>
+  <p>Video generation primarily aims to model authentic and customized motion across frames, making understanding and controlling the motion a crucial topic. 
+    Most diffusion-based studies on video motion focus on motion customization with training-based paradigms, which, however, demands substantial training resources and necessitates retraining for diverse models.
+    Crucially, these approaches do not explore how video diffusion models encode cross-frame motion information in their features, lacking interpretability and transparency in their effectiveness.
+    To answer this question, this paper introduces a novel perspective to <b>understand, localize, and manipulate</b> motion-aware features in video diffusion models. Through analysis using Principal Component Analysis (PCA), our work discloses that robust motion-aware feature already exists in video diffusion models. We present <b>MOtion FeaTure (MOFT)</b> by eliminating content correlation information and filtering motion channels. MOFT provides a distinct set of benefits, including the ability to encode comprehensive motion information with clear interpretability, extraction without the need for training, and generalizability across diverse architectures. Leveraging MOFT, we propose a novel training-free video motion control framework. Our method demonstrates competitive performance in generating natural and faithful motion, providing architecture-agnostic insights and applicability in various downstream tasks.</p>
+</div>
+<div class="content">
+  <h2>Motion Feature</h2>
+  <p> By applying Principal Component Analysis (PCA) on these diffusion features, we observe a strong correlation between the principal components and video motions. Further explorations reveal that certain channels of the features play a more significant role in determining motion direction than others.
+    Based on these observations, we present a straightforward strategy to extract motion information embedded in the features, termed <b>MOtion FeaTure (MOFT)</b>.
+  </p>
+  <br>
+  <p><b>Visualization of PCA on video diffusion features.</b> We apply PCA to diffusion features extracted from videos with different motion directions and plot their projections on the leading two principle components. (a) The result does not exhibit a distinguishable correlation with motion direction. (b) Features are clearly separated by their motion direction.</p>
+  <img class="summary-img" src="./static/paper/pca.jpg" style="width:100%;"> <br>
+  <p> <b>Cross-frame Channel Value.</b> The left side indicates the frame-wise panning direction, with each color representing a specific direction pattern. (a) We plot the histogram of the weight of PC_1. It reveals that only a few channels significantly contribute to determining the principal components. (b-c) The motion channels exhibit a pronounced correlation with motion direction trends. (d) In contrast, the non-motion channels show little correspondence with motion direction.</p>
+  <br>
+  <img class="summary-img" src="./static/paper/dimension_line_chart.jpg" style="width:100%;"> <br>
+</div>
+<div class="content">
+  <h2>Motion Control Pipeline</h2>
+  <p> We designed a pipeline to control motion in generated videos without requiring training. Our method optimizes latents to alter the sampling process using guidance from a reference MOFT. We propose two possible ways to construct the reference MOFT:
+    1. Extract MOFT from reference videos.
+    2. Synthesize MOFT based on statistical regularity.</p>
+  <br>
+  <img class="summary-img" src="./static/paper/mainfig.jpg" style="width:100%;"> <br>
+</div>
+<div class="content">
+  <h2>Gallery</h2>
+  <p> We illustrate several animation clips with different reference or synthesized motion control signals in the follwing sections.</p>
+</div>
+<div class="content">
+  <h2>Synthesized Motion Control - Camera Motion</h2>
+  <div class="row">
+    <div class="col">
+      <img src="./static/videos/motion_synthesize/zoom_in/arrow.png" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col">
+      <img src="./static/videos/motion_synthesize/zoom_in/coastline_0_sample.gif" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col">
+      <img src="./static/videos/motion_synthesize/zoom_in/deer_2_sample.gif" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col">
+      <img src="./static/videos/motion_synthesize/zoom_in/house_3_sample.gif" class="teaser-gif" style="width:100%;">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <img src="./static/videos/motion_synthesize/zoom_out/arrow.png" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col">
+      <img src="./static/videos/motion_synthesize/zoom_out/cat_2_sample.gif" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col">
+      <img src="./static/videos/motion_synthesize/zoom_out/cat_3_sample.gif" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col">
+      <img src="./static/videos/motion_synthesize/zoom_out/house_3_sample.gif" class="teaser-gif" style="width:100%;">
+    </div>
+  </div>
+</div>
+<div class="content">
+  <h2>Synthesized Motion Control - Object Motion</h2>
+  <div class="row">
+    <div class="col">
+      <img src="./static/videos/motion_synthesize/two_cat/two_cat_1_mask.png" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col">
+      <img src="./static/videos/motion_synthesize/two_cat/twocat1.gif" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col">
+      <img src="./static/videos/motion_synthesize/two_cat/two_cat_2_mask.png" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col">
+      <img src="./static/videos/motion_synthesize/two_cat/twocat2.gif" class="teaser-gif" style="width:100%;">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <img src="./static/videos/motion_synthesize/rabbit1.png" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col">
+      <img src="./static/videos/motion_synthesize/rabbit1.gif" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col">
+      <img src="./static/videos/motion_synthesize/rabbit2.png" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col">
+      <img src="./static/videos/motion_synthesize/rabbit2.gif" class="teaser-gif" style="width:100%;">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <img src="./static/videos/motion_synthesize/rabbit3.png" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col">
+      <img src="./static/videos/motion_synthesize/rabbit3.gif" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col">
+      <img src="./static/videos/motion_synthesize/rabbit4.png" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col">
+      <img src="./static/videos/motion_synthesize/rabbit4.gif" class="teaser-gif" style="width:100%;">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <img src="./static/videos/motion_synthesize/rabbit5.png" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col">
+      <img src="./static/videos/motion_synthesize/rabbit5.gif" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col">
+      <img src="./static/videos/motion_synthesize/rabbit7.png" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col">
+      <img src="./static/videos/motion_synthesize/rabbit7.gif" class="teaser-gif" style="width:100%;">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <img src="./static/videos/motion_synthesize/deer_mask_rightleft.jpg" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col">
+      <img src="./static/videos/motion_synthesize/deer_body_rightleft.gif" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col">
+      <img src="./static/videos/motion_synthesize/deer_mask_updown.jpg" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col">
+      <img src="./static/videos/motion_synthesize/deer_body_updown.gif" class="teaser-gif" style="width:100%;">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <img src="./static/videos/motion_synthesize/man_mask_rightleft.png" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col">
+      <img src="./static/videos/motion_synthesize/man_rightleft.gif" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col">
+      <img src="./static/videos/motion_synthesize/coast_mask_arrow.png" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col">
+      <img src="./static/videos/motion_synthesize/coast.gif" class="teaser-gif" style="width:100%;">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <img src="./static/videos/motion_synthesize/car_mask_arrow.png" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col">
+      <img src="./static/videos/motion_synthesize/car.gif" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col">
+      <img src="./static/videos/motion_synthesize/old_man_1_mask.png" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col">
+      <img src="./static/videos/motion_synthesize/old_man_13.gif" class="teaser-gif" style="width:100%;">
+    </div>
+  </div>
+</div>
+
+<div class="content">
+  <h2>Reference Motion Control - Camera Motion</h2>
+  <div class="row">
+    <div class="col">
+      <img src="./static/videos/motion_reference/reference_temple.gif" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col">
+      <img src="./static/videos/motion_reference/coastline_0_sample.gif" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col">
+      <img src="./static/videos/motion_reference/house.gif" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col">
+      <img src="./static/videos/motion_reference/rock.gif" class="teaser-gif" style="width:100%;">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <img src="./static/videos/motion_reference/orange.gif" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col">
+      <img src="./static/videos/motion_reference/bird.gif" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col">
+      <img src="./static/videos/motion_reference/cat.gif" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col">
+      <img src="./static/videos/motion_reference/dog.gif" class="teaser-gif" style="width:100%;">
+    </div>
+  </div>
+</div>
+
+<div class="content">
+  <h2>Reference Motion Control - Object Motion</h2>
+  <div class="row">
+    <div class="col">
+      <img src="./static/videos/motion_reference/cat_walk_resize.gif" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col">
+      <img src="./static/videos/motion_reference/dog_walking.gif" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col">
+      <img src="./static/videos/motion_reference/lionwalking.gif" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col">
+      <img src="./static/videos/motion_reference/bearwalking.gif" class="teaser-gif" style="width:100%;">
+    </div>
+  </div>
+</div>
+
+<div class="content">
+  <h2>Point-drag Results</h2>
+  <div class="row">
+    <div class="col">
+      <img src="./static/videos/point_dragging/drag_small_boat_add_point.gif" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col">
+      <img src="./static/videos/point_dragging/drag_sun_add_point.gif" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col">
+      <img src="./static/videos/point_dragging/man_left_add_point.gif" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col">
+      <img src="./static/videos/point_dragging/man_right_add_point.gif" class="teaser-gif" style="width:100%;">
+    </div>
+  </div>
+</div>
+
+<div class="content">
+  <h2>Qualitative Comparison</h2>
+  <div class="row">
+    <div class="col_6">
+      <div class="centered-content">
+        <p>DragNUWA</p>
+      </div>
+    </div>
+    <div class="col_6">
+      <div class="centered-content">
+        <p></p>
+      </div>
+    </div>
+    <div class="col_6">
+      <div class="centered-content">
+        <p>Gen-2</p>
+      </div>
+    </div>
+    <div class="col_6">
+      <div class="centered-content">
+        <p></p>
+      </div>
+    </div>
+    <div class="col_6">
+      <div class="centered-content">
+        <p>Ours</p>
+      </div>
+    </div>
+    <div class="col_6">
+      <div class="centered-content">
+        <p></p>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col_6">
+      <img src="./static/videos/qualitative_compare/dragnuwa_out/rabbit_mask_resize.jpg" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col_6">
+      <img src="./static/videos/qualitative_compare/dragnuwa_out/rabbit_head_left.gif" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col_6">
+      <img src="./static/videos/qualitative_compare/gen2_out/rabbit_mask.jpg" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col_6">
+      <img src="./static/videos/qualitative_compare/gen2_out/rabbit_head_left.gif" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col_6">
+      <img src="./static/videos/qualitative_compare/moft/rabbit_mask.jpg" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col_6">
+      <img src="./static/videos/qualitative_compare/moft/rabbit_head_left.gif" class="teaser-gif" style="width:100%;">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col_6">
+      <img src="./static/videos/qualitative_compare/dragnuwa_out/rabbit_mask_resize.jpg" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col_6">
+      <img src="./static/videos/qualitative_compare/dragnuwa_out/up.gif" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col_6">
+      <img src="./static/videos/qualitative_compare/gen2_out/man_surfing_mask.jpg" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col_6">
+      <img src="./static/videos/qualitative_compare/gen2_out/up.gif" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col_6">
+      <img src="./static/videos/qualitative_compare/moft/man_surfing_mask.jpg" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col_6">
+      <img src="./static/videos/qualitative_compare/moft/up.gif" class="teaser-gif" style="width:100%;">
+    </div>
+  </div>
+</div>
+
+<div class="content">
+  <h2>Motion Correspondence Visualization</h2>
+  <p>We extract MOFT at the red point in the reference video in the reference video and draw similarity heatmaps across various videos (yellow indicates higher similarity). The heatmap aligns well with the motion direction in the videos.</p>
+  <div class="row">
+    <div class="col_5">
+      <img src="./static/videos/motion_correspoandence/goose.gif" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col_5">
+      <img src="./static/videos/motion_correspoandence/1.gif" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col_5">
+      <img src="./static/videos/motion_correspoandence/2.gif" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col_5">
+      <img src="./static/videos/motion_correspoandence/3.gif" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col_5">
+      <img src="./static/videos/motion_correspoandence/4.gif" class="teaser-gif" style="width:100%;">
+    </div>
+  </div>
+  <p>* We calculate the correspondence for all frames here. </p>
+</div>
+
+<div class="content">
+  <h2>Video Consistency Preservation</h2>
+  <p>We adopt Shared K&V and Gradient Clip for video consistency preservation. Shared K&V contributes to the consistency of the whole video. Gradient Clip adds consistency out of masked regions but meanwhile reduces motion scale.</p>
+  <div class="row">
+    <div class="col_6">
+      <div class="centered-content">
+        <p>Origin</p>
+      </div>
+    </div>
+    <div class="col_6">
+      <div class="centered-content">
+        <p>Control Signal</p>
+      </div>
+    </div>
+    <div class="col_6">
+      <div class="centered-content">
+        <p>Vanilla Control</p>
+      </div>
+    </div>
+    <div class="col_6">
+      <div class="centered-content">
+        <p>Shared K&V</p>
+      </div>
+    </div>
+    <div class="col_6">
+      <div class="centered-content">
+        <p>8-frame Grad. Clip</p>
+      </div>
+    </div>
+    <div class="col_6">
+      <div class="centered-content">
+        <p>All-frame Grad. Clip</p>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col_6">
+      <img src="./static/videos/video_consistency_ablation/old_man_0_origin.gif" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col_6">
+      <img src="./static/videos/video_consistency_ablation/direction_image.png" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col_6">
+      <img src="./static/videos/video_consistency_ablation/old_man_07.gif" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col_6">
+      <img src="./static/videos/video_consistency_ablation/old_man_07_sharedkv.gif" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col_6">
+      <img src="./static/videos/video_consistency_ablation/old_man_07_add_clip_mask_8frame.gif" class="teaser-gif" style="width:100%;">
+    </div>
+    <div class="col_6">
+      <img src="./static/videos/video_consistency_ablation/old_man_07_add_clip_allframe.gif" class="teaser-gif" style="width:100%;">
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="content">
+  <p class="serif">
+    Project page template is borrowed from <a href="https://dreambooth.github.io/">DreamBooth</a>.
+  </p>
+</div>
+
+
+<!-- <div class="content">
+  <h2>BibTex</h2>
+  <code> @article{ruiz2022dreambooth,<br>
+  &nbsp;&nbsp;title={DreamBooth: Fine Tuning Text-to-image Diffusion Models for Subject-Driven Generation},<br>
+  &nbsp;&nbsp;author={Ruiz, Nataniel and Li, Yuanzhen and Jampani, Varun and Pritch, Yael and Rubinstein, Michael and Aberman, Kfir},<br>
+  &nbsp;&nbsp;booktitle={arXiv preprint arxiv:2208.12242},<br>
+  &nbsp;&nbsp;year={2022}<br>
+  } </code> 
+</div> -->
+</body>
+</html>
