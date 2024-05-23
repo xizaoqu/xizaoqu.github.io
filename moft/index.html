@@ -41,9 +41,9 @@
     Based on these observations, we present a straightforward strategy to extract motion information embedded in the features, termed <b>MOtion FeaTure (MOFT)</b>.
   </p>
   <br>
-  <p><b>Visualization of PCA on video diffusion features.</b> We apply PCA to diffusion features extracted from videos with different motion directions and plot their projections on the leading two principle components. (a) The result does not exhibit a distinguishable correlation with motion direction. (b) Features are clearly separated by their motion direction.</p>
+  <p><b>Visualization of PCA on video diffusion features.</b> The left side indicates the frame-wise panning direction, with each color representing a specific direction pattern. We apply PCA to diffusion features extracted from videos with different motion directions and plot their projections on the leading two principle components. (a) The result does not exhibit a distinguishable correlation with motion direction. (b) Features are clearly separated by their motion direction.</p>
   <img class="summary-img" src="./static/paper/pca.jpg" style="width:100%;"> <br>
-  <p> <b>Cross-frame Channel Value.</b> The left side indicates the frame-wise panning direction, with each color representing a specific direction pattern. (a) We plot the histogram of the weight of PC_1. It reveals that only a few channels significantly contribute to determining the principal components. (b-c) The motion channels exhibit a pronounced correlation with motion direction trends. (d) In contrast, the non-motion channels show little correspondence with motion direction.</p>
+  <p> <b>Cross-frame Channel Value.</b> (a) We plot the histogram of the weight of the first principal component. It reveals that only a few channels significantly contribute to determining the principal components. (b-c) The motion channels exhibit a pronounced correlation with motion direction trends. (d) In contrast, the non-motion channels show little correspondence with motion direction.</p>
   <br>
   <img class="summary-img" src="./static/paper/dimension_line_chart.jpg" style="width:100%;"> <br>
 </div>
