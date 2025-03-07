@@ -60,6 +60,13 @@
         <div class="column is-8">
           <h2 class="title is-2">Highlight</h2>
           <div class="columns is-centered">
+            <div class="column is-20">
+              <p class="has-text-left" style="font-size: 1.2rem; font-weight: 500; margin-top: 20px;">
+                <strong>WorldMem enables long-term consistent world generation with memory mechanism. </strong> We can control agents to explore diverse and consistent worlds with an expansive action space, crafting environments by placing objects like pumpkin light or freely roaming around. Most importantly, after exploring for a while and glancing back, we find the objects we placed are still there, with the sight of the light melting surrounding snow, indicating the passage of time!
+              </p>
+            </div>
+          </div>
+          <div class="columns is-centered">
             <!-- 让两个视频分别占据一半 -->
             <div class="column is-8">
               <video controls autoplay loop muted playsinline 
@@ -79,8 +86,31 @@
                   <p class="has-text-centered"><strong>Revisited View</strong></p>
                 </div>
               </div>
-              <h3 class="title is-4 has-text-centered">Inconsistent World Generation without Memory</h3>
+              <h3 class="title is-4 has-text-centered">w/o Memory</h3>
             </div>
+            <div class="column is-8">
+              <video controls autoplay loop muted playsinline 
+                src="./resources/success2.mp4" 
+                poster="./resources/loading-icon.gif"
+                style="width: 100%; border: 1px solid #bbb; border-radius: 10px; margin: 1.0%;">
+              </video>
+              <div class="columns is-centered">
+                <div class="column is-half has-text-centered">
+                  <img src="./resources/success_000.png" alt="" 
+                       style="width: 100%; border-radius: 10px; border: 1px solid #bbb;">
+                  <p class="has-text-centered"><strong>Initial View</strong></p>
+                </div>
+                <div class="column is-half has-text-centered">
+                  <img src="./resources/success_022.png" alt="" 
+                       style="width: 100%; border-radius: 10px; border: 1px solid #bbb;">
+                  <p class="has-text-centered"><strong>Revisited View</strong></p>
+                </div>
+              </div>
+              <h3 class="title is-4 has-text-centered">w/ Memory</h3>
+            </div>
+          </div>
+
+          <div class="columns is-centered" style="margin-top: 60px;">
             <div class="column is-8">
               <video controls autoplay loop muted playsinline 
                 src="./resources/cover.mp4" 
@@ -99,14 +129,7 @@
                   <p class="has-text-centered"><strong>Revisited View</strong></p>
                 </div>
               </div>
-              <h3 class="title is-4 has-text-centered">Consistent World Generation with Memory</h3>
-            </div>
-          </div>
-          <div class="columns is-centered">
-            <div class="column is-20">
-              <p class="has-text-left" style="font-size: 1.2rem; font-weight: 500; margin-top: 20px;">
-                <strong>WorldMem enables long-term consistent world generation with memory mechanism. </strong> We can control agents to explore diverse and consistent worlds with an expansive action space, crafting environments by placing objects like pumpkin light or freely roaming around. Most importantly, after exploring for a while and glancing back, we find the objects we placed are still there, with the sight of the light melting surrounding snow, indicating the passage of time!
-              </p>
+              <h3 class="title is-5 has-text-centered">Freely explore and interact within the consistent world!</h3>
             </div>
           </div>
         </div>
@@ -120,6 +143,14 @@
       <div class="columns is-centered has-text-centered">
         <div class="column is-8">
           <h2 class="title is-2">Compare with Ground Truth</h2>
+
+          <div class="columns is-centered">
+            <div class="column is-20">
+              <p class="has-text-left" style="font-size: 1.2rem; font-weight: 500; margin-top: 20px;">
+                Our method effectively models diverse dynamic scenarios. By conditioning on the memory bank, our framework accurately generates a world that remains consistent with its past states.
+              </p>
+            </div>
+          </div>
           <div class="columns is-centered">
             <!-- 让两个视频分别占据一半 -->
             <div class="column is-8">
@@ -140,7 +171,6 @@
             </div>
           </div>
           <div class="columns is-centered">
-            <!-- 让两个视频分别占据一半 -->
             <div class="column is-8">
               <video controls autoplay loop muted playsinline 
                 src="./resources/savanna_compare_gen.mp4" 
@@ -196,13 +226,6 @@
               <h3 class="title is-4 has-text-centered">Ground Truth</h3>
             </div>
           </div>
-          <div class="columns is-centered">
-            <div class="column is-20">
-              <p class="has-text-left" style="font-size: 1.2rem; font-weight: 500; margin-top: 20px;">
-                Our method effectively models diverse dynamic scenarios. By conditioning on the memory bank, our framework accurately generates a world that remains consistent with its past states.
-              </p>
-            </div>
-          </div>
         </div>
       </div>
     </div>
@@ -213,6 +236,14 @@
       <div class="columns is-centered has-text-centered">
         <div class="column is-8">
           <h2 class="title is-2">Interactive with the World</h2>
+
+          <div class="columns is-centered">
+            <div class="column is-20">
+              <p class="has-text-left" style="font-size: 1.2rem; font-weight: 500; margin-top: 20px;">
+                We can interact with the world by placing hay in the desert or planting wheat in the plains. Meanwhile, these changes are recorded and reproduced in revisited views. Over time, we can observe transformations such as wheat growing.
+              </p>
+            </div>
+          </div>
           <div class="columns is-centered">
             <!-- 让两个视频分别占据一半 -->
             <div class="column is-8">
@@ -256,10 +287,13 @@
               <h3 class="title is-4 has-text-centered">Plant Wheat in Plains</h3>
             </div>
           </div>
+
+          <div style="background: gray; height: 1px;"></div>
+
           <div class="columns is-centered">
             <div class="column is-20">
-              <p class="has-text-left" style="font-size: 1.2rem; font-weight: 500; margin-top: 20px;">
-                We can interact with the world by placing hay in the desert or planting wheat in the plains. Meanwhile, these changes are recorded and reproduced in revisited views. Over time, we can observe transformations such as wheat growing.
+              <p class="has-text-left" style="font-size: 1.2rem; font-weight: 500; margin-top: 80px;">
+                Without timestamps as a condition, the model struggles to distinguish between memory units representing the same location at different time points, leading to incorrect generations. In contrast, with time conditioning, the model effectively aligns with the updated world state, ensuring consistent outputs.
               </p>
             </div>
           </div>
@@ -306,13 +340,6 @@
               <h3 class="title is-4 has-text-centered">w/ Time Condition</h3>
             </div>
           </div>
-          <div class="columns is-centered">
-            <div class="column is-20">
-              <p class="has-text-left" style="font-size: 1.2rem; font-weight: 500; margin-top: 20px;">
-                Without timestamps as a condition, the model struggles to distinguish between memory units representing the same location at different time points, leading to incorrect generations. In contrast, with time conditioning, the model effectively aligns with the updated world state, ensuring consistent outputs.
-              </p>
-            </div>
-          </div>
         </div>
       </div>
     </div>
@@ -323,6 +350,13 @@
       <div class="columns is-centered has-text-centered">
         <div class="column is-8">
           <h2 class="title is-2">Real Scenes</h2>
+          <div class="columns is-centered">
+            <div class="column is-20">
+              <p class="has-text-left" style="font-size: 1.2rem; font-weight: 500; margin-top: 20px;">
+                In the 360-degree consistency testing. Our approach with memory successfully returns to the original location without losing previously generated details.
+              </p>
+            </div>
+          </div>
           <div class="columns is-centered">
             <!-- 让两个视频分别占据一半 -->
             <div class="column is-5">
@@ -366,10 +400,13 @@
               <h3 class="title is-4 has-text-centered">w/ Memory</h3>
             </div>
           </div>
+
+          <div style="background: gray; height: 1px;"></div>
+
           <div class="columns is-centered">
             <div class="column is-20">
-              <p class="has-text-left" style="font-size: 1.2rem; font-weight: 500; margin-top: 20px;">
-                In the 360-degree consistency testing. Our approach with memory successfully returns to the original location without losing previously generated details.
+              <p class="has-text-left" style="font-size: 1.2rem; font-weight: 500; margin-top: 80px;">
+                Our method can generate consistent results with customized trajectories.
               </p>
             </div>
           </div>
@@ -412,13 +449,6 @@
                   <p class="has-text-centered"><strong>Revisited View</strong></p>
                 </div>
               </div>
-            </div>
-          </div>
-          <div class="columns is-centered">
-            <div class="column is-20">
-              <p class="has-text-left" style="font-size: 1.2rem; font-weight: 500; margin-top: 20px;">
-                Our method can generate consistent results with customized trajectories.
-              </p>
             </div>
           </div>
         </div>
