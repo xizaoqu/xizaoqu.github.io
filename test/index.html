@@ -237,18 +237,30 @@
           <h2 class="title is-3">Teaser</h2>
         </div>
       </div>
-
       <!-- TLDR Box -->
       <div class="columns is-centered has-text-centered">
         <div class="column is-four-fifths">
           <div class="notification is-info is-light" style="font-size: 1.1rem; font-weight: 500; border: 1px solid #2563eb; color: #4a4a4a;">
-            <strong>TL;DR:</strong> We present a simple video generation framework that performs spatial tasks (e.g., object grounding, navigation) from video context and instructions.
+            <strong>TL;DR:</strong> We investigate whether video generative models can exhibit visuospatial intelligence, a capability central to human cognition, using only visual data as context.
+          </div>
+        </div>
+      </div>
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <div class="notification is-info is-light" style="font-size: 1.1rem; font-weight: 500; border: 1px solid #2563eb; color: #4a4a4a;">
+            placeholder: a simple demo video
           </div>
         </div>
       </div>
       <!-- End TLDR Box -->
       <!-- TODO: Replace with your teaser video -->
       <!-- Two side-by-side teaser videos -->
+
+      <div class="notification is-info is-light" style="margin-top: 1rem; font-size: 1.1rem; font-weight: 500; border: 1px solid #2563eb;">
+        <h2 class="subtitle has-text-centered" style="font-size: 1.1rem; line-height: 1.6; color: #4a4a4a; margin-bottom: 0;">
+          We sample non-continuous frames from the source video as context and perform instruction-following spatial tasks: video-based object grounding and scene navigation. Our method generates videos that fulfill instructional spatial tasks while remaining geometrically consistent with the provided video context.
+        </h2>
+      </div>
       <div class="columns is-variable is-2 is-vcentered is-centered">
         <div class="column is-half">
           <video poster="assets/teaser/teaser_source.jpg" id="teaser_left" controls muted style="width:100%; height:auto; border-radius: var(--border-radius);" preload="metadata">
@@ -263,18 +275,21 @@
           <h2 class="subtitle has-text-centered">Sampled context</h2>
         </div>
       </div>
-
-      <div class="notification is-info is-light" style="margin-top: 1rem; font-size: 1.1rem; font-weight: 500; border: 1px solid #2563eb;">
-        <h2 class="subtitle has-text-centered" style="font-size: 1.1rem; line-height: 1.6; color: #4a4a4a; margin-bottom: 0;">
-          We sample non-continuous frames from the source video as context and perform instruction-following spatial tasks: video-based object grounding and scene navigation.
-        </h2>
-      </div>
       <br>
 
       <h2 class="title is-4 has-text-centered">
           Object Grounding
       </h2>
 
+      <div style="border: 1px solid #dbdbdb; border-radius: 6px; padding: 1.5rem; margin-bottom: 2rem; background-color: #f8f9fa;">
+      <div class="has-text-centered" style="margin-bottom: 1rem;">
+        <button class="button is-link is-light is-small is-rounded" onclick="playVideosInContainer('object-grounding-group-1')">
+          <span class="icon"><i class="fas fa-play"></i></span>
+          <span>Play All</span>
+        </button>
+      </div>
+
+      <div id="object-grounding-group-1">
       <div class="columns is-variable is-2 is-vcentered is-centered">
         <div class="column is-half">
           <video poster="assets/teaser/teaser_guitar.jpg" id="teaser_guitar" controls muted style="width:100%; height:auto; border-radius: var(--border-radius);" preload="metadata">
@@ -312,12 +327,23 @@
         </h2>
         </div>
       </div>
+      </div>
+      </div>
 
       <br>
       <h2 class="title is-4 has-text-centered">
         Scene Navigation
       </h2>
-      <div class="columns is-variable is-2 is-vcentered is-centered" style="width: 120%; margin-left: -10%;">
+      <div style="border: 1px solid #dbdbdb; border-radius: 6px; padding: 1.5rem; margin-bottom: 2rem; background-color: #f8f9fa; width: 120%; margin-left: -10%;">
+      <div class="has-text-centered" style="margin-bottom: 1rem;">
+        <button class="button is-link is-light is-small is-rounded" onclick="playVideosInContainer('scene-nav-teaser-group')">
+          <span class="icon"><i class="fas fa-play"></i></span>
+          <span>Play All</span>
+        </button>
+      </div>
+
+      <div id="scene-nav-teaser-group">
+      <div class="columns is-variable is-2 is-vcentered is-centered">
         <div class="column is-half">
           <video poster="assets/teaser/side_by_side1.jpg" id="camctrl_side1" controls muted style="width:100%; height:auto; border-radius: var(--border-radius);" preload="metadata">
             <source src="assets/teaser/side_by_side1.mp4" type="video/mp4">
@@ -335,12 +361,7 @@
         </h2>
         </div>
       </div>
-      <!-- TODO: Replace with your video description -->
-      <div class="notification is-info is-light" style="margin-top: 1rem; font-size: 1.1rem; font-weight: 500; border: 1px solid #2563eb;">
-        <h2 class="subtitle has-text-centered" style="font-size: 1.1rem; line-height: 1.6; color: #4a4a4a; margin-bottom: 0;">
-          Our method generates videos that fulfill instructional spatial tasks while remaining geometrically consistent with the provided
-        video context.
-        </h2>
+      </div>
       </div>
     </div>
   </div>
@@ -377,10 +398,24 @@
       <h2 class="title is-3 has-text-centered">
         Comparisons
       </h2>
-
       <h2 class="title is-4 has-text-centered">
         Object Grounding
       </h2>
+      <div class="notification is-info is-light" style="margin-top: 1rem; font-size: 1.1rem; font-weight: 500; border: 1px solid #2563eb;">
+        <h2 class="subtitle has-text-centered" style="font-size: 1.1rem; line-height: 1.6; color: #4a4a4a; margin-bottom: 0;">
+          Our method faithfully grounds the object present in the context, whereas other methods <b>hallucinate</b> the target object.
+        </h2>
+      </div>
+      <h2 class="subtitle has-text-centered">* Wan2.2-5B and Veo3 take 1 frame as context, FramePack uses 105 frames as context, while ours uses 337 frames as context.</h2>
+      <div style="border: 1px solid #dbdbdb; border-radius: 6px; padding: 1.5rem; margin-bottom: 2rem; background-color: #f8f9fa;">
+      <div class="has-text-centered" style="margin-bottom: 1rem;">
+        <button class="button is-link is-light is-small is-rounded" onclick="playVideosInContainer('object-grounding-group-2')">
+          <span class="icon"><i class="fas fa-play"></i></span>
+          <span>Play All</span>
+        </button>
+      </div>
+
+      <div id="object-grounding-group-2">
       <div class="columns is-variable is-2 is-vcentered is-centered">
         <div class="column is-one-quarter">
           <video poster="assets/comparison_grounding/context.jpg" id="teaser_left" controls muted style="width:100%; height:auto; border-radius: var(--border-radius);" preload="metadata">
@@ -418,8 +453,19 @@
       <h2 class="subtitle has-text-centered">
         Instruction: The camera moves smoothly through a bedroom. Finally, it focuses on a <span class="text-gradient-blue">bag</span> on top of the dresser in the center of the frame.
       </h2>
+      </div>
+      </div>
       <br>
 
+      <div style="border: 1px solid #dbdbdb; border-radius: 6px; padding: 1.5rem; margin-bottom: 2rem; background-color: #f8f9fa;">
+      <div class="has-text-centered" style="margin-bottom: 1rem;">
+        <button class="button is-link is-light is-small is-rounded" onclick="playVideosInContainer('object-grounding-group-3')">
+          <span class="icon"><i class="fas fa-play"></i></span>
+          <span>Play All</span>
+        </button>
+      </div>
+
+      <div id="object-grounding-group-3">
       <div class="columns is-variable is-2 is-vcentered is-centered">
         <div class="column is-one-quarter">
           <video poster="assets/comparison_grounding/context2.jpg" id="teaser_left" controls muted style="width:100%; height:auto; border-radius: var(--border-radius);" preload="metadata">
@@ -457,17 +503,34 @@
       <h2 class="subtitle has-text-centered">
         Instruction: The camera moves through a desk area. Finally, it focuses on a <span class="text-gradient-blue">monitor</span> in the center of the frame.
       </h2>
-      <br>
-      <div class="notification is-info is-light" style="margin-top: 1rem; font-size: 1.1rem; font-weight: 500; border: 1px solid #2563eb;">
-        <h2 class="subtitle has-text-centered" style="font-size: 1.1rem; line-height: 1.6; color: #4a4a4a; margin-bottom: 0;">
-          Our method faithfully grounds the object present in the context, whereas other methods hallucinate the target object.
-        </h2>
+      </div>
+      </div>
+      <div style="border: 1px solid #dbdbdb; border-radius: 6px; padding: 1.5rem; margin: 2rem 0; background-color: #f8f9fa; display: flex; justify-content: center;">
+        <figure style="text-align: center;">
+          <h2 class="subtitle has-text-centered">
+            Qualitative comparison of object grounding performance.
+          </h2>
+          <img src="assets/comparison_grounding/results.png" alt="Comparison Quantitative Results Table" style="max-width: 90%; height: auto; border: 1px solid #dbdbdb; border-radius: 8px; background: #fff; box-shadow: 0 1px 4px rgba(0,0,0,0.05);">
+        </figure>
       </div>
       <br>
-      
       <h2 class="title is-4 has-text-centered">
         Scene Navigation
       </h2>
+      <div class="notification is-info is-light" style="margin-top: 1rem; font-size: 1.1rem; font-weight: 500; border: 1px solid #2563eb;">
+        <h2 class="subtitle has-text-centered" style="font-size: 1.1rem; line-height: 1.6; color: #4a4a4a; margin-bottom: 0;">
+          Our method delivers the highest perceptual quality and good camera controllability. 
+        </h2>
+      </div>
+      <div style="border: 1px solid #dbdbdb; border-radius: 6px; padding: 1.5rem; margin-bottom: 2rem; background-color: #f8f9fa;">
+      <div class="has-text-centered" style="margin-bottom: 1rem;">
+        <button class="button is-link is-light is-small is-rounded" onclick="playVideosInContainer('scene-nav-group-1')">
+          <span class="icon"><i class="fas fa-play"></i></span>
+          <span>Play All</span>
+        </button>
+      </div>
+
+      <div id="scene-nav-group-1">
       <div class="columns is-variable is-2 is-vcentered is-centered">
         <div class="column is-one-quarter">
           <video poster="assets/comparison_navigation/context.jpg" id="teaser_left" controls muted style="width:100%; height:auto; border-radius: var(--border-radius);" preload="metadata">
@@ -514,7 +577,20 @@
           <h2 class="subtitle has-text-centered">Ours</h2>
         </div>
       </div>
+      </div>
+      </div>
+      
       <br>
+      
+      <div style="border: 1px solid #dbdbdb; border-radius: 6px; padding: 1.5rem; margin-bottom: 2rem; background-color: #f8f9fa;">
+      <div class="has-text-centered" style="margin-bottom: 1rem;">
+        <button class="button is-link is-light is-small is-rounded" onclick="playVideosInContainer('scene-nav-group-2')">
+          <span class="icon"><i class="fas fa-play"></i></span>
+          <span>Play All</span>
+        </button>
+      </div>
+
+      <div id="scene-nav-group-2">
       <div class="columns is-variable is-2 is-vcentered is-centered">
         <div class="column is-one-quarter">
           <video poster="assets/comparison_navigation/context2.jpg" id="teaser_left" controls muted style="width:100%; height:auto; border-radius: var(--border-radius);" preload="metadata">
@@ -561,10 +637,15 @@
           <h2 class="subtitle has-text-centered">Ours</h2>
         </div>
       </div>
-      <div class="notification is-info is-light" style="margin-top: 1rem; font-size: 1.1rem; font-weight: 500; border: 1px solid #2563eb;">
-        <h2 class="subtitle has-text-centered" style="font-size: 1.1rem; line-height: 1.6; color: #4a4a4a; margin-bottom: 0;">
-          Our method delivers the highest perceptual quality and good camera controllability. 
+      </div>
+      </div>
+      <div style="border: 1px solid #dbdbdb; border-radius: 6px; padding: 1.5rem; margin-top: 2rem; margin-bottom: 2rem; background-color: #f8f9fa;">
+      <div class="has-text-centered">
+        <h2 class="subtitle has-text-centered" style="margin-top: 0.75rem;">
+          Qualitative comparison of scene navigation results.
         </h2>
+        <img src="assets/comparison_navigation/results.png" alt="navigation comparison results" style="max-width:50%; height:auto; border-radius: var(--border-radius); box-shadow: 0 2px 8px rgba(0,0,0,0.04);" />
+      </div>
       </div>
 </div>
 </div>
@@ -578,45 +659,84 @@
   <div class="hero-body">
     <div class="container">
       <h2 class="title is-3 has-text-centered">Out-of-Distribution Generalization</h2>
+      <div class="notification is-info is-light" style="margin-top: 1rem; font-size: 1.1rem; font-weight: 500; border: 1px solid #2563eb;">
+        <h2 class="subtitle has-text-centered" style="font-size: 1.1rem; line-height: 1.6; color: #4a4a4a; margin-bottom: 0;">
+          Our models can generalize to out-of-distribution (OOD) scenarios like outdoor scenes and new categories, performing object grounding and scene navigation.
+        </h2>
+      </div>
+      <div style="border: 1px solid #dbdbdb; border-radius: 6px; padding: 1.5rem; margin-bottom: 2rem; background-color: #f8f9fa;">
+      <div class="has-text-centered" style="margin-bottom: 1rem;">
+        <button class="button is-link is-light is-small is-rounded" onclick="playVideosInContainer('ood-group-1')">
+          <span class="icon"><i class="fas fa-play"></i></span>
+          <span>Play All</span>
+        </button>
+      </div>
 
-    <div class="columns is-variable is-2 is-vcentered is-centered">
-      <div class="column is-one-quarter">
-        <video poster="assets/ood/context.jpg" id="teaser_left" controls muted style="width:100%; height:auto; border-radius: var(--border-radius);" preload="metadata">
-          <source src="assets/ood/context.mp4" type="video/mp4">
-        </video>
-        <h2 class="subtitle has-text-centered">Context of Case 1</h2>
+      <div id="ood-group-1">
+      <div class="columns is-variable is-2 is-vcentered is-centered">
+        <div class="column is-one-quarter">
+          <video poster="assets/ood/context.jpg" id="teaser_left" controls muted style="width:100%; height:auto; border-radius: var(--border-radius);" preload="metadata">
+            <source src="assets/ood/context.mp4" type="video/mp4">
+          </video>
+          <h2 class="subtitle has-text-centered">Context</h2>
+        </div>
+        <div class="column is-one-quarter">
+          <video poster="assets/ood/tree.jpg" id="teaser_right" controls muted style="width:100%; height:auto; border-radius: var(--border-radius);" preload="metadata">
+            <source src="assets/ood/tree.mp4" type="video/mp4">
+          </video>
+          <h2 class="subtitle has-text-centered">Instruction (simplified): <span class="text-gradient-blue">Tree</span></h2>
+        </div>
+        <div class="column is-one-quarter">
+          <video poster="assets/ood/bike.jpg" id="teaser_right" controls muted style="width:100%; height:auto; border-radius: var(--border-radius);" preload="metadata">
+            <source src="assets/ood/bike.mp4" type="video/mp4">
+          </video>
+          <h2 class="subtitle has-text-centered">Instruction: <span class="text-gradient-blue">Bicycle</span></h2>
+        </div>
       </div>
-      <div class="column is-one-quarter">
-        <video poster="assets/ood/tree.jpg" id="teaser_right" controls muted style="width:100%; height:auto; border-radius: var(--border-radius);" preload="metadata">
-          <source src="assets/ood/tree.mp4" type="video/mp4">
-        </video>
-        <h2 class="subtitle has-text-centered"><span class="text-gradient-blue">Tree</span></h2>
+      <div class="columns is-variable is-2 is-vcentered is-centered">
+        <div class="column is-one-quarter">
+          <video poster="assets/ood/cam.jpg" id="teaser_left" controls muted style="width:100%; height:auto; border-radius: var(--border-radius);" preload="metadata">
+            <source src="assets/ood/cam.mp4" type="video/mp4">
+          </video>
+          <h2 class="subtitle has-text-centered">Instruction: Camera Pose</h2>
+        </div>
+        <div class="column is-one-quarter">
+          <video poster="assets/ood/nav1.jpg" id="teaser_right" controls muted style="width:100%; height:auto; border-radius: var(--border-radius);" preload="metadata">
+            <source src="assets/ood/nav1.mp4" type="video/mp4">
+          </video>
+          <h2 class="subtitle has-text-centered">Results</h2>
+        </div>
       </div>
-      <div class="column is-one-quarter">
-        <video poster="assets/ood/bike.jpg" id="teaser_right" controls muted style="width:100%; height:auto; border-radius: var(--border-radius);" preload="metadata">
-          <source src="assets/ood/bike.mp4" type="video/mp4">
-        </video>
-        <h2 class="subtitle has-text-centered"><span class="text-gradient-blue">Bicycle</span></h2>
       </div>
-    </div>
-    <div class="columns is-variable is-2 is-vcentered is-centered">
+      </div>
+    <br>
+    <div style="border: 1px solid #dbdbdb; border-radius: 6px; padding: 1.5rem; margin-bottom: 2rem; background-color: #f8f9fa;">
+      <div class="has-text-centered" style="margin-bottom: 1rem;">
+        <button class="button is-link is-light is-small is-rounded" onclick="playVideosInContainer('ood-group-2')">
+          <span class="icon"><i class="fas fa-play"></i></span>
+          <span>Play All</span>
+        </button>
+      </div>
+
+      <div id="ood-group-2">
+      <div class="columns is-variable is-2 is-vcentered is-centered">
       <div class="column is-one-quarter">
         <video poster="assets/ood/myroom_context.jpg" id="teaser_left" controls muted style="width:100%; height:auto; border-radius: var(--border-radius);" preload="metadata">
           <source src="assets/ood/myroom_context.mp4" type="video/mp4">
         </video>
-        <h2 class="subtitle has-text-centered">Context of Case 2</h2>
+        <h2 class="subtitle has-text-centered">Context</h2>
       </div>
       <div class="column is-one-quarter">
         <video poster="assets/ood/myroom_monitor.jpg" id="teaser_right" controls muted style="width:100%; height:auto; border-radius: var(--border-radius);" preload="metadata">
           <source src="assets/ood/myroom_monitor.mp4" type="video/mp4">
         </video>
-        <h2 class="subtitle has-text-centered"><span class="text-gradient-blue">Monitor</span></h2>
+        <h2 class="subtitle has-text-centered">Instruction: <span class="text-gradient-blue">Monitor</span></h2>
       </div>
       <div class="column is-one-quarter">
         <video poster="assets/ood/myroom_window.jpg" id="teaser_right" controls muted style="width:100%; height:auto; border-radius: var(--border-radius);" preload="metadata">
           <source src="assets/ood/myroom_window.mp4" type="video/mp4">
         </video>
-        <h2 class="subtitle has-text-centered"><span class="text-gradient-blue">Window</span></h2>
+        <h2 class="subtitle has-text-centered">Instruction: <span class="text-gradient-blue">Window</span></h2>
       </div>
     </div>
     <div class="columns is-variable is-2 is-vcentered is-centered">
@@ -624,27 +744,19 @@
         <video poster="assets/ood/cam.jpg" id="teaser_left" controls muted style="width:100%; height:auto; border-radius: var(--border-radius);" preload="metadata">
           <source src="assets/ood/cam.mp4" type="video/mp4">
         </video>
-        <h2 class="subtitle has-text-centered">Camera Pose</h2>
-      </div>
-      <div class="column is-one-quarter">
-        <video poster="assets/ood/nav1.jpg" id="teaser_right" controls muted style="width:100%; height:auto; border-radius: var(--border-radius);" preload="metadata">
-          <source src="assets/ood/nav1.mp4" type="video/mp4">
-        </video>
-        <h2 class="subtitle has-text-centered">Case 1</h2>
+        <h2 class="subtitle has-text-centered">Instruction: Camera Pose</h2>
       </div>
       <div class="column is-one-quarter">
         <video poster="assets/ood/myroom_cam.jpg" id="teaser_right" controls muted style="width:100%; height:auto; border-radius: var(--border-radius);" preload="metadata">
           <source src="assets/ood/myroom_cam.mp4" type="video/mp4">
         </video>
-        <h2 class="subtitle has-text-centered">Case 2</h2>
+        <h2 class="subtitle has-text-centered">Results</h2>
       </div>
     </div>
-
-    <div class="notification is-info is-light" style="margin-top: 1rem; font-size: 1.1rem; font-weight: 500; border: 1px solid #2563eb;">
-      <h2 class="subtitle has-text-centered" style="font-size: 1.1rem; line-height: 1.6; color: #4a4a4a; margin-bottom: 0;">
-        Our models can generalize to out-of-distribution (OOD) scenarios like outdoor scenes and new categories, performing object grounding and scene navigation.
-      </h2>
     </div>
+    </div>
+
+
   </div>
   </div>
 </section>
@@ -655,6 +767,20 @@
   <div class="hero-body">
     <div class="container">
       <h2 class="title is-3 has-text-centered">Failure Cases</h2>
+      <div class="notification is-info is-light" style="margin-top: 1rem; font-size: 1.1rem; font-weight: 500; border: 1px solid #2563eb;">
+        <h2 class="subtitle has-text-centered" style="font-size: 1.1rem; line-height: 1.6; color: #4a4a4a; margin-bottom: 0;">
+        Our method still suffers from artifacts such as temporal discontinuities (row 1) and incorrect grounding (row 2) for some cases. We observe that the model accuracy grows as the repeat times increase.
+      </h2>
+      </div>
+      <div style="border: 1px solid #dbdbdb; border-radius: 6px; padding: 1.5rem; margin-bottom: 2rem; background-color: #f8f9fa;">
+      <div class="has-text-centered" style="margin-bottom: 1rem;">
+        <button class="button is-link is-light is-small is-rounded" onclick="playVideosInContainer('failure-cases-group-1')">
+          <span class="icon"><i class="fas fa-play"></i></span>
+          <span>Play All</span>
+        </button>
+      </div>
+
+      <div id="failure-cases-group-1">
       <div class="columns is-variable is-2 is-vcentered is-centered">
         <div class="column is-one-quarter">
           <video poster="assets/failure_cases/context.jpg" id="teaser_left" controls muted style="width:100%; height:auto; border-radius: var(--border-radius);" preload="metadata">
@@ -678,6 +804,17 @@
       <h2 class="subtitle has-text-centered">
         Instruction: The camera moves smoothly through a kitchen. Finally, it focuses on a <span class="text-gradient-blue">sink</span> in the center of the frame.
       </h2>
+      </div>
+      </div>
+      <div style="border: 1px solid #dbdbdb; border-radius: 6px; padding: 1.5rem; margin-bottom: 2rem; background-color: #f8f9fa;">
+      <div class="has-text-centered" style="margin-bottom: 1rem;">
+        <button class="button is-link is-light is-small is-rounded" onclick="playVideosInContainer('failure-cases-group-2')">
+          <span class="icon"><i class="fas fa-play"></i></span>
+          <span>Play All</span>
+        </button>
+      </div>
+
+      <div id="failure-cases-group-2">
       <div class="columns is-variable is-2 is-vcentered is-centered">
         <div class="column is-one-quarter">
           <video poster="assets/failure_cases/context2.jpg" id="teaser_left" controls muted style="width:100%; height:auto; border-radius: var(--border-radius);" preload="metadata">
@@ -701,18 +838,15 @@
       <h2 class="subtitle has-text-centered">
         Instruction: The camera moves from a desk area. Finally, it focuses on a <span class="text-gradient-blue">suitcase</span> in the center of the frame.
       </h2>
-    <div class="columns is-centered is-vcentered" style="margin-top: 1.5rem;">
+      </div>
+      </div>
+    <!-- <div class="columns is-centered is-vcentered" style="margin-top: 1.5rem;">
       <div class="column is-one-quarter" style="display: flex; justify-content: center;">
         <figure class="image" style="display: flex; flex-direction: column; align-items: center;">
           <img src="assets/failure_cases/repeat_time.png" alt="Repeat Time Failure Case" style="max-width: 100%; height: auto; max-height: 300px; object-fit: contain; border-radius: var(--border-radius);"/>
         </figure>
       </div>
-    </div>
-    <div class="notification is-info is-light" style="margin-top: 1rem; font-size: 1.1rem; font-weight: 500; border: 1px solid #2563eb;">
-      <h2 class="subtitle has-text-centered" style="font-size: 1.1rem; line-height: 1.6; color: #4a4a4a; margin-bottom: 0;">
-      Our method still suffers from artifacts such as temporal discontinuities and incorrect grounding for some cases. We also observe that the model accuracy grows as the repeat times increase.
-    </h2>
-    </div>
+    </div> -->
   </div>
 </section>
 <!-- End video carousel -->
@@ -783,5 +917,16 @@
 
     <!-- End of Statcounter Code -->
 
-  </body>
+  <script>
+function playVideosInContainer(containerId) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+  const videos = container.querySelectorAll('video');
+  videos.forEach(video => {
+    video.currentTime = 0;
+    video.play();
+  });
+}
+</script>
+</body>
   </html>
