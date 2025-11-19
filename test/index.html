@@ -245,11 +245,14 @@
           </div>
         </div>
       </div>
-      <div class="columns is-centered has-text-centered">
+
+      <div class="columns is-centered is-vcentered" style="margin-bottom: 2rem;">
         <div class="column is-four-fifths">
-          <div class="notification is-info is-light" style="font-size: 1.1rem; font-weight: 500; border: 1px solid #2563eb; color: #4a4a4a;">
-            placeholder: a simple demo video
-          </div>
+          <video poster="assets/teaser/demo.jpg" id="teaser_demo" controls muted style="width:100%; height:auto; border-radius: var(--border-radius);" preload="metadata">
+            <source src="assets/teaser/demo.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+          <h2 class="subtitle has-text-centered">Demo Video</h2>
         </div>
       </div>
       <!-- End TLDR Box -->
@@ -267,6 +270,12 @@
             <source src="assets/teaser/teaser_source.mp4" type="video/mp4">
           </video>
           <h2 class="subtitle has-text-centered">Source video</h2>
+        </div>
+        <!-- INSERT_YOUR_CODE -->
+        <div class="column is-narrow" style="display: flex; align-items: center; justify-content: center;">
+          <span style="font-size: 2.8rem; color: #2563eb;">
+            <i class="fas fa-arrow-right"></i>
+          </span>
         </div>
         <div class="column is-half">
           <video poster="assets/teaser/teaser_context_video.jpg" id="teaser_right" controls muted style="width:100%; height:auto; border-radius: var(--border-radius);" preload="metadata">
