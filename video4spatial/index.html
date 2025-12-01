@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <!-- Primary Meta Tags -->
+  <meta name="title" content="Video4Spatial">
+  <title>Video4Spatial</title>
+  
+  <!-- Critical CSS - Load synchronously -->
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/index.css?v=da5">
+  
+  <!-- Non-critical CSS - Load asynchronously -->
+  <link rel="preload" href="static/css/bulma-carousel.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="static/css/bulma-slider.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="static/css/fontawesome.all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  
+  <!-- Fallback for browsers that don't support preload -->
+  <noscript>
+    <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+    <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+    <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  </noscript>
+  
+  <!-- Fonts - Optimized loading -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Defer non-critical JavaScript -->
+  <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script defer src="static/js/bulma-carousel.min.js"></script>
+  <script defer src="static/js/bulma-slider.min.js"></script>
+  <script defer src="static/js/index.js"></script>
+
+    <style>
+      /* Sidebar styling */
+      .sidebar {
+        position: fixed;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 240px;
+        background-color: #ffffff;
+        padding: 40px 20px;
+        box-shadow: 1px 0 15px rgba(0,0,0,0.05);
+        z-index: 1000;
+        overflow-y: auto;
+        font-family: 'Inter', sans-serif;
+        border-right: 1px solid #f0f0f0;
+      }
+      .sidebar h3 {
+        margin-bottom: 25px;
+        font-size: 0.9em;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: #b5b5b5;
+        padding-left: 10px;
+      }
+      .sidebar ul {
+        list-style: none;
+        padding: 0;
+      }
+      .sidebar li {
+        margin-bottom: 8px;
+      }
+      .sidebar a {
+        display: block;
+        color: #4a4a4a;
+        text-decoration: none;
+        padding: 10px 15px;
+        border-radius: 8px;
+        font-weight: 500;
+        font-size: 0.95em;
+        transition: all 0.2s ease;
+      }
+      .sidebar a:hover {
+        background-color: #f5f8ff;
+        color: #2563eb;
+        transform: translateX(3px);
+      }
+      /* Adjust main content margin to accommodate sidebar */
+      body {
+        margin-left: 240px;
+        background-color: #ffffff;
+      }
+      /* Hide sidebar on small screens */
+      @media screen and (max-width: 1024px) {
+        .sidebar {
+          display: none;
+        }
+        body {
+          margin-left: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <h3>Contents</h3>
+    <ul>
+      <li><a href="#top">Top</a></li>
+      <li><a href="#teaser">Overview</a></li>
+      <li><a href="#abstract">Framework</a></li>
+      <li><a href="#comparisons">Comparisons</a>
+        <ul style="padding-left: 15px;">
+          <li><a href="#object-grounding" style="font-size: 0.9em;">Object Grounding</a></li>
+          <li><a href="#scene-navigation" style="font-size: 0.9em;">Scene Navigation</a></li>
+        </ul>
+      </li>
+      <li><a href="#ood">OOD Generalization</a></li>
+      <li><a href="#failure-cases">Failure Cases</a></li>
+    </ul>
+  </aside>
+
+  <!-- Scroll to Top Button -->
+  <button class="scroll-to-top" onclick="scrollToTop()" title="Scroll to top" aria-label="Scroll to top">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+
+  <main id="main-content">
+    <div id="top"></div>
+    <!-- Banner 区域 -->
+    <section class="banner">
+      <div class="banner-content">
+          <div class="banner-text">
+              <h2 class="banner-title">Video4Spatial</h2>
+              <h3 class="banner-subtitle">Towards Visuospatial Intelligence with Context-Guided Video Generation</h3>
+          </div>
+      </div>
+      <div class="is-size-5 publication-authors">
+        <span class="author-block">
+          <a href="https://github.com/xizaoqu" target="_blank">Zeqi Xiao</a><sup>1,2</sup>,</span>
+        <span class="author-block">
+          <a href="https://scholar.google.com/citations?user=FiMEAdYAAAAJ&hl=en" target="_blank">Yiwei Zhao</a><sup>1, &dagger;, <i class="fas fa-envelope"></i></sup>,</span>
+        <span class="author-block">
+          <a href="https://lingxiao.li/" target="_blank">Lingxiao Li</a><sup>1</sup>,</span>
+        <span class="author-block">
+          <a href="https://nirvanalan.github.io/" target="_blank">Yushi Lan</a><sup>3</sup>,</span>
+        <span class="author-block">
+          <a href="https://ningyu1991.github.io/" target="_blank">Yu Ning</a><sup>4</sup>,</span>
+        <span class="author-block">
+          <a href="https://rahuldotgarg.appspot.com/" target="_blank">Rahul Garg</a><sup>1</sup>,</span>
+        <span class="author-block">
+          <a href="https://scholar.google.com/citations?user=Qpjm3JQAAAAJ&hl=en" target="_blank">Mohammad H. Taghavi</a><sup>1</sup>,</span>
+        <span class="author-block">
+          <a href="https://xingangpan.github.io/" target="_blank">Xingang Pan</a><sup>2, <i class="fas fa-envelope"></i></sup></span>
+      </div>
+
+      <div class="is-size-5 publication-authors">
+        <span class="author-block"><sup>1</sup>Netflix,</span>
+        <span class="author-block"><sup>2</sup>Nanyang Technological University,</span>
+        <span class="author-block"><sup>3</sup>University of Oxford,</span>
+        <span class="author-block"><sup>4</sup>Netflix Eyeline Studios</span>
+        <span class="eql-cntrb"><small><br><sup>&dagger;</sup>Project Lead, <i class="fas fa-envelope"></i>Corresponding Author</small></span>
+      </div>
+
+      <div class="column has-text-centered">
+        <div class="publication-links">
+          <span class="link-block">
+            <a href="assets/Video4Spatial.pdf" target="_blank"
+            class="external-link button is-normal is-rounded is-dark">
+            <span class="icon">
+              <i class="fas fa-file-pdf"></i>
+            </span>
+            <span>Paper</span>
+            </a>
+          </span>
+          <span class="link-block">
+            <a href="https://arxiv.org/abs/<ARXIV PAPER ID>" target="_blank"
+            class="external-link button is-normal is-rounded is-dark">
+            <span class="icon">
+              <i class="ai ai-arxiv"></i>
+            </span>
+            <span>arXiv (soon)</span>
+            </a>
+          </span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+
+<!-- Teaser video-->
+<section class="hero is-small" id="teaser">
+  <div class="hero-body">
+    <div class="container" style="max-width: 1100px">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Overview</h2>
+        </div>
+      </div>
+      <!-- TLDR Box -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <div class="notification is-info is-light" style="font-size: 1.1rem; font-weight: 500; border: 1px solid #2563eb; color: #4a4a4a;">
+            <strong>TL;DR:</strong> We investigate whether video generative models can exhibit visuospatial intelligence, a capability central to human cognition, using only visual data as context.
+          </div>
+        </div>
+      </div>
+
+      <div class="columns is-centered is-vcentered" style="margin-bottom: 2rem;">
+        <div class="column is-four-fifths">
+          <video poster="assets/teaser/demo.jpg" id="teaser_demo" controls muted style="width:100%; height:auto; border-radius: var(--border-radius);" preload="metadata">
+            <source src="assets/teaser/demo.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+          <h2 class="subtitle has-text-centered">Demo Video</h2>
+        </div>
+      </div>
+
+      <div class="notification is-info is-light" style="margin-top: 1rem; font-size: 1.1rem; font-weight: 500; border: 1px solid #2563eb;">
+        <h2 class="subtitle has-text-centered" style="font-size: 1.1rem; line-height: 1.6; color: #4a4a4a; margin-bottom: 0;">
+          We sample non-continuous frames from the source video as context and perform instruction-following spatial tasks: video-based object grounding and scene navigation. Our method generates videos that fulfill instructional spatial tasks while remaining geometrically consistent with the provided video context.
+        </h2>
+      </div>
+      <div class="columns is-variable is-2 is-vcentered is-centered">
+        <div class="column is-half">
+          <video poster="assets/teaser/teaser_source.jpg" id="teaser_left" controls muted style="width:100%; height:auto; border-radius: var(--border-radius);" preload="metadata">
+            <source src="assets/teaser/teaser_source.mp4" type="video/mp4">
+          </video>
+          <h2 class="subtitle has-text-centered">Source video</h2>
+        </div>
+        <!-- INSERT_YOUR_CODE -->
+        <div class="column is-narrow" style="display: flex; align-items: center; justify-content: center;">
+          <span style="font-size: 2.8rem; color: #2563eb;">
+            <i class="fas fa-arrow-right"></i>
+          </span>
+        </div>
+        <div class="column is-half">
+          <video poster="assets/teaser/teaser_context_video.jpg" id="teaser_right" controls muted style="width:100%; height:auto; border-radius: var(--border-radius);" preload="metadata">
+            <source src="assets/teaser/teaser_context_video.mp4" type="video/mp4">
+          </video>
+          <h2 class="subtitle has-text-centered">Sampled context</h2>
+        </div>
+      </div>
+      <br>
+
+      <h2 class="title is-4 has-text-centered">
+          Object Grounding
+      </h2>
+
+      <h2 class="subtitle has-text-centered">
+        * Red bbox is generated by the model.
+      </h2>
+      <div style="border: 1px solid #dbdbdb; border-radius: 6px; padding: 1.5rem; margin-bottom: 2rem; background-color: #f8f9fa;">
+      <div class="has-text-centered" style="margin-bottom: 1rem;">
+        <button class="button is-link is-light is-small is-rounded" onclick="playVideosInContainer('object-grounding-group-1')">
+          <span class="icon"><i class="fas fa-play"></i></span>
+          <span>Play All</span>
+        </button>
+      </div>
+
+      <div id="object-grounding-group-1">
+      <div class="columns is-variable is-2 is-vcentered is-centered">
+        <div class="column is-half">
+          <video poster="assets/teaser/teaser_guitar.jpg" id="teaser_guitar" controls muted style="width:100%; height:auto; border-radius: var(--border-radius);" preload="metadata">
+            <source src="assets/teaser/teaser_guitar.mp4" type="video/mp4">
+          </video>
+          <h2 class="subtitle has-text-centered">
+            Instruction: The camera moves smoothly through a bedroom. Finally, it focuses on a <span class="text-gradient-blue">guitar</span> in the center of the frame.
+          </h2>
+        </div>
+        <div class="column is-half">
+          <video poster="assets/teaser/teaser_greenplant.jpg" id="teaser_greenplant" controls muted style="width:100%; height:auto; border-radius: var(--border-radius);" preload="metadata">
+            <source src="assets/teaser/teaser_greenplant.mp4" type="video/mp4">
+          </video>
+          <h2 class="subtitle has-text-centered">
+            Instruction: The camera moves smoothly through a bedroom. Finally, it focuses on a <span class="text-gradient-blue">green plant</span> in the center of the frame.
+          </h2>
+        </div>
+      </div>
+
+      <div class="columns is-variable is-2 is-vcentered is-centered">
+        <div class="column is-half">
+          <video poster="assets/teaser/teaser_door1.jpg" id="teaser_door1" controls muted style="width:100%; height:auto; border-radius: var(--border-radius);" preload="metadata">
+            <source src="assets/teaser/teaser_door1.mp4" type="video/mp4">
+          </video>
+          <h2 class="subtitle has-text-centered">
+            Instruction: The camera moves smoothly through a bedroom. Finally, it focuses on a <span class="text-gradient-blue">door</span> in the center of the frame (<span class="text-gradient-blue">seed 1</span>).
+        </h2>
+        </div>
+        <div class="column is-half">
+          <video poster="assets/teaser/teaser_door2.jpg" id="teaser_door2" controls muted style="width:100%; height:auto; border-radius: var(--border-radius);" preload="metadata">
+            <source src="assets/teaser/teaser_door2.mp4" type="video/mp4">
+          </video>
+          <h2 class="subtitle has-text-centered">
+            Instruction: The camera moves smoothly through a bedroom. Finally, it focuses on a <span class="text-gradient-blue">door</span> in the center of the frame (<span class="text-gradient-blue">seed 2</span>).
+        </h2>
+        </div>
+      </div>
+      </div>
+      </div>
+
+      <br>
+      <h2 class="title is-4 has-text-centered">
+        Scene Navigation
+      </h2>
+      <div style="border: 1px solid #dbdbdb; border-radius: 6px; padding: 1.5rem; margin-bottom: 2rem; background-color: #f8f9fa; width: 120%; margin-left: -10%;">
+      <div class="has-text-centered" style="margin-bottom: 1rem;">
+        <button class="button is-link is-light is-small is-rounded" onclick="playVideosInContainer('scene-nav-teaser-group')">
+          <span class="icon"><i class="fas fa-play"></i></span>
+          <span>Play All</span>
+        </button>
+      </div>
+
+      <div id="scene-nav-teaser-group">
+      <div class="columns is-variable is-2 is-vcentered is-centered">
+        <div class="column is-half">
+          <video poster="assets/teaser/side_by_side1.jpg" id="camctrl_side1" controls muted style="width:100%; height:auto; border-radius: var(--border-radius);" preload="metadata">
+            <source src="assets/teaser/side_by_side1.mp4" type="video/mp4">
+          </video>
+          <h2 class="subtitle has-text-centered">
+            The camera moves smoothly in a bedroom.
+        </h2>
+        </div>
+        <div class="column is-half">
+          <video poster="assets/teaser/side_by_side2.jpg" id="camctrl_side2" controls muted style="width:100%; height:auto; border-radius: var(--border-radius);" preload="metadata">
+            <source src="assets/teaser/side_by_side2.mp4" type="video/mp4">
+          </video>
+          <h2 class="subtitle has-text-centered">
+            The camera moves smoothly in a bedroom.
+        </h2>
+        </div>
+      </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End teaser video -->
+
+<!-- Paper abstract -->
+<section class="section hero is-light" id="abstract">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Framework</h2>
+        <div class="content has-text-justified">
+          <!-- TODO: Replace with your paper abstract -->
+          <p>
+            Our framework is intentionally simple: a standard video diffusion architecture trained only with the diffusion objective. The inputs are a video context (several frames from the same environment) and instructions; the output is a video that completes the instructed spatial task while maintaining scene geometry and temporal coherence.
+          </p>
+          <p>
+            <img src="assets/framework.png" alt="Illustrative figure" style="max-width:100%; height:auto; display:block; margin:2rem auto;" />
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End paper abstract -->
+
+
+
+<!-- Image carousel -->
+<section class="hero is-small" id="comparisons">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title is-3 has-text-centered">
+        Comparisons
+      </h2>
+      <h2 class="title is-4 has-text-centered" id="object-grounding">
+        Object Grounding
+      </h2>
+      <div class="notification is-info is-light" style="margin-top: 1rem; font-size: 1.1rem; font-weight: 500; border: 1px solid #2563eb;">
+        <h2 class="subtitle has-text-centered" style="font-size: 1.1rem; line-height: 1.6; color: #4a4a4a; margin-bottom: 0;">
+          Our method faithfully grounds the object present in the context, whereas other methods <b>hallucinate</b> the target object.
+        </h2>
+      </div>
+      <h2 class="subtitle has-text-centered">* Wan2.2-5B and Veo3 take 1 frame as context, FramePack uses 105 frames as context, while ours uses 337 frames as context.</h2>
+      <div style="border: 1px solid #dbdbdb; border-radius: 6px; padding: 1.5rem; margin-bottom: 2rem; background-color: #f8f9fa;">
+      <div class="has-text-centered" style="margin-bottom: 1rem;">
+        <button class="button is-link is-light is-small is-rounded" onclick="playVideosInContainer('object-grounding-group-2')">
+          <span class="icon"><i class="fas fa-play"></i></span>
+          <span>Play All</span>
+        </button>
+      </div>
+
+      <div id="object-grounding-group-2">
+      <div class="columns is-variable is-2 is-vcentered is-centered">
+        <div class="column is-one-quarter">
+          <video poster="assets/comparison_grounding/context.jpg" id="teaser_left" controls muted style="width:100%; height:auto; border-radius: var(--border-radius);" preload="metadata">
+            <source src="assets/comparison_grounding/context.mp4" type="video/mp4">
+          </video>
+          <h2 class="subtitle has-text-centered">Context</h2>
+        </div>
+      </div>
+      <div class="columns is-variable is-2 is-vcentered is-centered">
+        <div class="column is-one-quarter">
+          <video poster="assets/comparison_grounding/wan22.jpg" id="teaser_left" controls muted style="width:100%; height:auto; border-radius: var(--border-radius);" preload="metadata">
+            <source src="assets/comparison_grounding/wan22.mp4" type="video/mp4">
+          </video>
+          <h2 class="subtitle has-text-centered">Wan2.2-5B</h2>
+        </div>
+        <div class="column is-one-quarter">
+          <video poster="assets/comparison_grounding/veo3.jpg" id="teaser_right" controls muted style="width:100%; height:auto; border-radius: var(--border-radius);" preload="metadata">
+            <source src="assets/comparison_grounding/veo3.mp4" type="video/mp4">
+          </video>
+          <h2 class="subtitle has-text-centered">Veo3</h2>
+        </div>
+        <div class="column is-one-quarter">
+          <video poster="assets/comparison_grounding/framepack.jpg" id="teaser_out1" controls muted style="width:100%; height:auto; border-radius: var(--border-radius);" preload="metadata">
+            <source src="assets/comparison_grounding/framepack.mp4" type="video/mp4">
+          </video>
+          <h2 class="subtitle has-text-centered">FramePack</h2>
+        </div>
+        <div class="column is-one-quarter">
+          <video poster="assets/comparison_grounding/ours.jpg" id="teaser_out2" controls muted style="width:100%; height:auto; border-radius: var(--border-radius);" preload="metadata">
+            <source src="assets/comparison_grounding/ours.mp4" type="video/mp4">
+          </video>
+          <h2 class="subtitle has-text-centered">Ours</h2>
+        </div>
+      </div>
+      <h2 class="subtitle has-text-centered">
+        Instruction: The camera moves smoothly through a bedroom. Finally, it focuses on a <span class="text-gradient-blue">bag</span> on top of the dresser in the center of the frame.
+      </h2>
+      </div>
+      </div>
+      <br>
+
+      <div style="border: 1px solid #dbdbdb; border-radius: 6px; padding: 1.5rem; margin-bottom: 2rem; background-color: #f8f9fa;">
+      <div class="has-text-centered" style="margin-bottom: 1rem;">
+        <button class="button is-link is-light is-small is-rounded" onclick="playVideosInContainer('object-grounding-group-3')">
+          <span class="icon"><i class="fas fa-play"></i></span>
+          <span>Play All</span>
+        </button>
+      </div>
+
+      <div id="object-grounding-group-3">
+      <div class="columns is-variable is-2 is-vcentered is-centered">
+        <div class="column is-one-quarter">
+          <video poster="assets/comparison_grounding/context2.jpg" id="teaser_left" controls muted style="width:100%; height:auto; border-radius: var(--border-radius);" preload="metadata">
+            <source src="assets/comparison_grounding/context2.mp4" type="video/mp4">
+          </video>
+          <h2 class="subtitle has-text-centered">Context</h2>
+        </div>
+      </div>
+      <div class="columns is-variable is-2 is-vcentered is-centered">
+        <div class="column is-one-quarter">
+          <video poster="assets/comparison_grounding/wan222.jpg" id="teaser_left" controls muted style="width:100%; height:auto; border-radius: var(--border-radius);" preload="metadata">
+            <source src="assets/comparison_grounding/wan222.mp4" type="video/mp4">
+          </video>
+          <h2 class="subtitle has-text-centered">Wan2.2-5B</h2>
+        </div>
+        <div class="column is-one-quarter">
+          <video poster="assets/comparison_grounding/veo32.jpg" id="teaser_right" controls muted style="width:100%; height:auto; border-radius: var(--border-radius);" preload="metadata">
+            <source src="assets/comparison_grounding/veo32.mp4" type="video/mp4">
+          </video>
+          <h2 class="subtitle has-text-centered">Veo3</h2>
+        </div>
+        <div class="column is-one-quarter">
+          <video poster="assets/comparison_grounding/framepack2.jpg" id="teaser_out1" controls muted style="width:100%; height:auto; border-radius: var(--border-radius);" preload="metadata">
+            <source src="assets/comparison_grounding/framepack2.mp4" type="video/mp4">
+          </video>
+          <h2 class="subtitle has-text-centered">FramePack</h2>
+        </div>
+        <div class="column is-one-quarter">
+          <video poster="assets/comparison_grounding/ours2.jpg" id="teaser_out2" controls muted style="width:100%; height:auto; border-radius: var(--border-radius);" preload="metadata">
+            <source src="assets/comparison_grounding/ours2.mp4" type="video/mp4">
+          </video>
+          <h2 class="subtitle has-text-centered">Ours</h2>
+        </div>
+      </div>
+      <h2 class="subtitle has-text-centered">
+        Instruction: The camera moves through a desk area. Finally, it focuses on a <span class="text-gradient-blue">monitor</span> in the center of the frame.
+      </h2>
+      </div>
+      </div>
+      <div style="border: 1px solid #dbdbdb; border-radius: 6px; padding: 1.5rem; margin: 2rem 0; background-color: #f8f9fa; display: flex; justify-content: center;">
+        <figure style="text-align: center;">
+          <h2 class="subtitle has-text-centered">
+            Qualitative comparison of object grounding performance.
+          </h2>
+          <img src="assets/comparison_grounding/results.png" alt="Comparison Quantitative Results Table" style="max-width: 90%; height: auto; border: 1px solid #dbdbdb; border-radius: 8px; background: #fff; box-shadow: 0 1px 4px rgba(0,0,0,0.05);">
+        </figure>
+      </div>
+      <br>
+      <h2 class="title is-4 has-text-centered" id="scene-navigation">
+        Scene Navigation
+      </h2>
+      <div class="notification is-info is-light" style="margin-top: 1rem; font-size: 1.1rem; font-weight: 500; border: 1px solid #2563eb;">
+        <h2 class="subtitle has-text-centered" style="font-size: 1.1rem; line-height: 1.6; color: #4a4a4a; margin-bottom: 0;">
+          Our method delivers the highest perceptual quality and good camera controllability. 
+        </h2>
+      </div>
+      <div style="border: 1px solid #dbdbdb; border-radius: 6px; padding: 1.5rem; margin-bottom: 2rem; background-color: #f8f9fa;">
+      <div class="has-text-centered" style="margin-bottom: 1rem;">
+        <button class="button is-link is-light is-small is-rounded" onclick="playVideosInContainer('scene-nav-group-1')">
+          <span class="icon"><i class="fas fa-play"></i></span>
+          <span>Play All</span>
+        </button>
+      </div>
+
+      <div id="scene-nav-group-1">
+      <div class="columns is-variable is-2 is-vcentered is-centered">
+        <div class="column is-one-quarter">
+          <video poster="assets/comparison_navigation/context.jpg" id="teaser_left" controls muted style="width:100%; height:auto; border-radius: var(--border-radius);" preload="metadata">
+            <source src="assets/comparison_navigation/context.mp4" type="video/mp4">
+          </video>
+          <h2 class="subtitle has-text-centered">Context</h2>
+        </div>
+        <div class="column is-one-quarter">
+          <video poster="assets/comparison_navigation/cam.jpg" id="teaser_right" controls muted style="width:100%; height:auto; border-radius: var(--border-radius);" preload="metadata">
+            <source src="assets/comparison_navigation/cam.mp4" type="video/mp4">
+          </video>
+          <h2 class="subtitle has-text-centered">Instruction: Camera Pose</h2>
+        </div>
+        <div class="column is-one-quarter">
+          <video poster="assets/comparison_navigation/gt.jpg" id="teaser_right" controls muted style="width:100%; height:auto; border-radius: var(--border-radius);" preload="metadata">
+            <source src="assets/comparison_navigation/gt.mp4" type="video/mp4">
+          </video>
+          <h2 class="subtitle has-text-centered">GT (only for reference)</h2>
+        </div>
+      </div>
+      <div class="columns is-variable is-2 is-vcentered is-centered">
+        <div class="column is-one-quarter">
+          <video poster="assets/comparison_navigation/anysplat.jpg" id="teaser_left" controls muted style="width:100%; height:auto; border-radius: var(--border-radius);" preload="metadata">
+            <source src="assets/comparison_navigation/anysplat.mp4" type="video/mp4">
+          </video>
+          <h2 class="subtitle has-text-centered">AnySplat</h2>
+        </div>
+        <div class="column is-one-quarter">
+          <video poster="assets/comparison_navigation/gen3c.jpg" id="teaser_right" controls muted style="width:100%; height:auto; border-radius: var(--border-radius);" preload="metadata">
+            <source src="assets/comparison_navigation/gen3c.mp4" type="video/mp4">
+          </video>
+          <h2 class="subtitle has-text-centered">Gen3C</h2>
+        </div>
+        <div class="column is-one-quarter">
+          <video poster="assets/comparison_navigation/trajectorycrafter.jpg" id="teaser_out1" controls muted style="width:100%; height:auto; border-radius: var(--border-radius);" preload="metadata">
+            <source src="assets/comparison_navigation/trajectorycrafter.mp4" type="video/mp4">
+          </video>
+          <h2 class="subtitle has-text-centered">TrajectoryCrafter</h2>
+        </div>
+        <div class="column is-one-quarter">
+          <video poster="assets/comparison_navigation/ours.jpg" id="teaser_out2" controls muted style="width:100%; height:auto; border-radius: var(--border-radius);" preload="metadata">
+            <source src="assets/comparison_navigation/ours.mp4" type="video/mp4">
+          </video>
+          <h2 class="subtitle has-text-centered">Ours</h2>
+        </div>
+      </div>
+      </div>
+      </div>
+      
+      <br>
+      
+      <div style="border: 1px solid #dbdbdb; border-radius: 6px; padding: 1.5rem; margin-bottom: 2rem; background-color: #f8f9fa;">
+      <div class="has-text-centered" style="margin-bottom: 1rem;">
+        <button class="button is-link is-light is-small is-rounded" onclick="playVideosInContainer('scene-nav-group-2')">
+          <span class="icon"><i class="fas fa-play"></i></span>
+          <span>Play All</span>
+        </button>
+      </div>
+
+      <div id="scene-nav-group-2">
+      <div class="columns is-variable is-2 is-vcentered is-centered">
+        <div class="column is-one-quarter">
+          <video poster="assets/comparison_navigation/context2.jpg" id="teaser_left" controls muted style="width:100%; height:auto; border-radius: var(--border-radius);" preload="metadata">
+            <source src="assets/comparison_navigation/context2.mp4" type="video/mp4">
+          </video>
+          <h2 class="subtitle has-text-centered">Context</h2>
+        </div>
+        <div class="column is-one-quarter">
+          <video poster="assets/comparison_navigation/cam2.jpg" id="teaser_right" controls muted style="width:100%; height:auto; border-radius: var(--border-radius);" preload="metadata">
+            <source src="assets/comparison_navigation/cam2.mp4" type="video/mp4">
+          </video>
+          <h2 class="subtitle has-text-centered">Instruction: Camera Pose</h2>
+        </div>
+        <div class="column is-one-quarter">
+          <video poster="assets/comparison_navigation/gt2.jpg" id="teaser_right" controls muted style="width:100%; height:auto; border-radius: var(--border-radius);" preload="metadata">
+            <source src="assets/comparison_navigation/gt2.mp4" type="video/mp4">
+          </video>
+          <h2 class="subtitle has-text-centered">GT (only for reference)</h2>
+        </div>
+      </div>
+      <div class="columns is-variable is-2 is-vcentered is-centered">
+        <div class="column is-one-quarter">
+          <video poster="assets/comparison_navigation/anysplat2.jpg" id="teaser_left" controls muted style="width:100%; height:auto; border-radius: var(--border-radius);" preload="metadata">
+            <source src="assets/comparison_navigation/anysplat2.mp4" type="video/mp4">
+          </video>
+          <h2 class="subtitle has-text-centered">AnySplat</h2>
+        </div>
+        <div class="column is-one-quarter">
+          <video poster="assets/comparison_navigation/gen3c2.jpg" id="teaser_right" controls muted style="width:100%; height:auto; border-radius: var(--border-radius);" preload="metadata">
+            <source src="assets/comparison_navigation/gen3c2.mp4" type="video/mp4">
+          </video>
+          <h2 class="subtitle has-text-centered">Gen3C</h2>
+        </div>
+        <div class="column is-one-quarter">
+          <video poster="assets/comparison_navigation/trajectorycrafter2.jpg" id="teaser_out1" controls muted style="width:100%; height:auto; border-radius: var(--border-radius);" preload="metadata">
+            <source src="assets/comparison_navigation/trajectorycrafter2.mp4" type="video/mp4">
+          </video>
+          <h2 class="subtitle has-text-centered">TrajectoryCrafter</h2>
+        </div>
+        <div class="column is-one-quarter">
+          <video poster="assets/comparison_navigation/ours2.jpg" id="teaser_out2" controls muted style="width:100%; height:auto; border-radius: var(--border-radius);" preload="metadata">
+            <source src="assets/comparison_navigation/ours2.mp4" type="video/mp4">
+          </video>
+          <h2 class="subtitle has-text-centered">Ours</h2>
+        </div>
+      </div>
+      </div>
+      </div>
+      <div style="border: 1px solid #dbdbdb; border-radius: 6px; padding: 1.5rem; margin-top: 2rem; margin-bottom: 2rem; background-color: #f8f9fa;">
+      <div class="has-text-centered">
+        <h2 class="subtitle has-text-centered" style="margin-top: 0.75rem;">
+          Qualitative comparison of scene navigation results.
+        </h2>
+        <img src="assets/comparison_navigation/results.png" alt="navigation comparison results" style="max-width:50%; height:auto; border-radius: var(--border-radius); box-shadow: 0 2px 8px rgba(0,0,0,0.04);" />
+      </div>
+      </div>
+</div>
+</div>
+</section>
+<!-- End image carousel -->
+
+<!-- Ablation Study -->
+<section class="hero is-light" id="ablation">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title is-3 has-text-centered">Ablation Study</h2>
+      <div class="notification is-info is-light" style="margin-top: 1rem; font-size: 1.1rem; font-weight: 500; border: 1px solid #2563eb;">
+        <h2 class="subtitle has-text-centered" style="font-size: 1.1rem; line-height: 1.6; color: #4a4a4a; margin-bottom: 0;">
+          Visualization for ablations on condition frame number, CFG, and auxiliary bbox. The instruction is "The camera moves through an office space. Finally, it focuses on a <span class="text-gradient-blue">monitor</span> in the center of the frame."
+        </h2>
+      </div>
+      <div style="border: 1px solid #dbdbdb; border-radius: 6px; padding: 1.5rem; margin-bottom: 2rem; background-color: #f8f9fa;">
+      <div class="has-text-centered" style="margin-bottom: 1rem;">
+        <button class="button is-link is-light is-small is-rounded" onclick="playVideosInContainer('ood-group-1')">
+          <span class="icon"><i class="fas fa-play"></i></span>
+          <span>Play All</span>
+        </button>
+      </div>
+
+      <div id="ood-group-1">
+      <div class="columns is-variable is-2 is-vcentered is-centered">
+        <div class="column is-one-quarter">
+          <video poster="assets/ablation/context.jpg" id="teaser_left" controls muted style="width:100%; height:auto; border-radius: var(--border-radius);" preload="metadata">
+            <source src="assets/ablation/context.mp4" type="video/mp4">
+          </video>
+          <h2 class="subtitle has-text-centered">Context</h2>
+        </div>
+        <div class="column is-one-quarter">
+          <video poster="assets/ablation/generated_video_default.jpg" id="teaser_right" controls muted style="width:100%; height:auto; border-radius: var(--border-radius);" preload="metadata">
+            <source src="assets/ablation/generated_video_default.mp4" type="video/mp4">
+          </video>
+          <h2 class="subtitle has-text-centered">Default</h2>
+        </div>
+        <div class="column is-one-quarter">
+          <video poster="assets/ablation/generated_video_w_45context.jpg" id="teaser_right" controls muted style="width:100%; height:auto; border-radius: var(--border-radius);" preload="metadata">
+            <source src="assets/ablation/generated_video_w_45context.mp4" type="video/mp4">
+          </video>
+          <h2 class="subtitle has-text-centered">W/ 45 context frames (infer)</h2>
+        </div>
+      </div>
+      <div class="columns is-variable is-2 is-vcentered is-centered">
+        <div class="column is-one-quarter">
+          <video poster="assets/ablation/generated_video_wo_context.jpg" id="teaser_left" controls muted style="width:100%; height:auto; border-radius: var(--border-radius);" preload="metadata">
+            <source src="assets/ablation/generated_video_wo_context.mp4" type="video/mp4">
+          </video>
+          <h2 class="subtitle has-text-centered">W/ only the first frame (infer)</h2>
+        </div>
+        <div class="column is-one-quarter">
+          <video poster="assets/ablation/generated_video_wo_contextcfg.jpg" id="teaser_right" controls muted style="width:100%; height:auto; border-radius: var(--border-radius);" preload="metadata">
+            <source src="assets/ablation/generated_video_wo_contextcfg.mp4" type="video/mp4">
+          </video>
+          <h2 class="subtitle has-text-centered">W/o context CFG</h2>
+        </div>
+        <div class="column is-one-quarter">
+          <video poster="assets/ablation/generated_video_wo_proxybbox.jpg" id="teaser_right" controls muted style="width:100%; height:auto; border-radius: var(--border-radius);" preload="metadata">
+            <source src="assets/ablation/generated_video_wo_proxybbox.mp4" type="video/mp4">
+          </video>
+          <h2 class="subtitle has-text-centered">W/o auxiliary bbox</h2>
+        </div>
+      </div>
+      </div>
+      </div>
+
+
+  </div>
+  </div>
+</section>
+
+<!-- Out-of-Distribution Generalization -->
+<section class="hero is-small" id="ood">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title is-3 has-text-centered">Out-of-Distribution Generalization</h2>
+      <div class="notification is-info is-light" style="margin-top: 1rem; font-size: 1.1rem; font-weight: 500; border: 1px solid #2563eb;">
+        <h2 class="subtitle has-text-centered" style="font-size: 1.1rem; line-height: 1.6; color: #4a4a4a; margin-bottom: 0;">
+          Our models can generalize to out-of-distribution (OOD) scenarios like outdoor scenes and new categories, performing object grounding and scene navigation. Below are two cases of real scenes scanned by iPone.
+        </h2>
+      </div>
+      <div style="border: 1px solid #dbdbdb; border-radius: 6px; padding: 1.5rem; margin-bottom: 2rem; background-color: #f8f9fa;">
+      <div class="has-text-centered" style="margin-bottom: 1rem;">
+        <button class="button is-link is-light is-small is-rounded" onclick="playVideosInContainer('ood-group-1')">
+          <span class="icon"><i class="fas fa-play"></i></span>
+          <span>Play All</span>
+        </button>
+      </div>
+
+      <div id="ood-group-1">
+      <div class="columns is-variable is-2 is-vcentered is-centered">
+        <div class="column is-one-quarter">
+          <video poster="assets/ood/context.jpg" id="teaser_left" controls muted style="width:100%; height:auto; border-radius: var(--border-radius);" preload="metadata">
+            <source src="assets/ood/context.mp4" type="video/mp4">
+          </video>
+          <h2 class="subtitle has-text-centered">Context</h2>
+        </div>
+        <div class="column is-one-quarter">
+          <video poster="assets/ood/tree.jpg" id="teaser_right" controls muted style="width:100%; height:auto; border-radius: var(--border-radius);" preload="metadata">
+            <source src="assets/ood/tree.mp4" type="video/mp4">
+          </video>
+          <h2 class="subtitle has-text-centered">Instruction (simplified): <span class="text-gradient-blue">Tree</span></h2>
+        </div>
+        <div class="column is-one-quarter">
+          <video poster="assets/ood/bike.jpg" id="teaser_right" controls muted style="width:100%; height:auto; border-radius: var(--border-radius);" preload="metadata">
+            <source src="assets/ood/bike.mp4" type="video/mp4">
+          </video>
+          <h2 class="subtitle has-text-centered">Instruction: <span class="text-gradient-blue">Bicycle</span></h2>
+        </div>
+      </div>
+      <div class="columns is-variable is-2 is-vcentered is-centered">
+        <div class="column is-one-quarter">
+          <video poster="assets/ood/cam.jpg" id="teaser_left" controls muted style="width:100%; height:auto; border-radius: var(--border-radius);" preload="metadata">
+            <source src="assets/ood/cam.mp4" type="video/mp4">
+          </video>
+          <h2 class="subtitle has-text-centered">Instruction: Camera Pose</h2>
+        </div>
+        <div class="column is-one-quarter">
+          <video poster="assets/ood/nav1.jpg" id="teaser_right" controls muted style="width:100%; height:auto; border-radius: var(--border-radius);" preload="metadata">
+            <source src="assets/ood/nav1.mp4" type="video/mp4">
+          </video>
+          <h2 class="subtitle has-text-centered">Results</h2>
+        </div>
+      </div>
+      </div>
+      </div>
+    <br>
+    <div style="border: 1px solid #dbdbdb; border-radius: 6px; padding: 1.5rem; margin-bottom: 2rem; background-color: #f8f9fa;">
+      <div class="has-text-centered" style="margin-bottom: 1rem;">
+        <button class="button is-link is-light is-small is-rounded" onclick="playVideosInContainer('ood-group-2')">
+          <span class="icon"><i class="fas fa-play"></i></span>
+          <span>Play All</span>
+        </button>
+      </div>
+
+      <div id="ood-group-2">
+      <div class="columns is-variable is-2 is-vcentered is-centered">
+      <div class="column is-one-quarter">
+        <video poster="assets/ood/myroom_context.jpg" id="teaser_left" controls muted style="width:100%; height:auto; border-radius: var(--border-radius);" preload="metadata">
+          <source src="assets/ood/myroom_context.mp4" type="video/mp4">
+        </video>
+        <h2 class="subtitle has-text-centered">Context</h2>
+      </div>
+      <div class="column is-one-quarter">
+        <video poster="assets/ood/myroom_monitor.jpg" id="teaser_right" controls muted style="width:100%; height:auto; border-radius: var(--border-radius);" preload="metadata">
+          <source src="assets/ood/myroom_monitor.mp4" type="video/mp4">
+        </video>
+        <h2 class="subtitle has-text-centered">Instruction: <span class="text-gradient-blue">Monitor</span></h2>
+      </div>
+      <div class="column is-one-quarter">
+        <video poster="assets/ood/myroom_window.jpg" id="teaser_right" controls muted style="width:100%; height:auto; border-radius: var(--border-radius);" preload="metadata">
+          <source src="assets/ood/myroom_window.mp4" type="video/mp4">
+        </video>
+        <h2 class="subtitle has-text-centered">Instruction: <span class="text-gradient-blue">Window</span></h2>
+      </div>
+    </div>
+    <div class="columns is-variable is-2 is-vcentered is-centered">
+      <div class="column is-one-quarter">
+        <video poster="assets/ood/cam.jpg" id="teaser_left" controls muted style="width:100%; height:auto; border-radius: var(--border-radius);" preload="metadata">
+          <source src="assets/ood/cam.mp4" type="video/mp4">
+        </video>
+        <h2 class="subtitle has-text-centered">Instruction: Camera Pose</h2>
+      </div>
+      <div class="column is-one-quarter">
+        <video poster="assets/ood/myroom_cam.jpg" id="teaser_right" controls muted style="width:100%; height:auto; border-radius: var(--border-radius);" preload="metadata">
+          <source src="assets/ood/myroom_cam.mp4" type="video/mp4">
+        </video>
+        <h2 class="subtitle has-text-centered">Results</h2>
+      </div>
+    </div>
+    </div>
+    </div>
+
+
+  </div>
+  </div>
+</section>
+
+
+<!-- Failure Cases -->
+<section class="hero is-light" id="failure-cases">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title is-3 has-text-centered">Failure Cases</h2>
+      <div class="notification is-info is-light" style="margin-top: 1rem; font-size: 1.1rem; font-weight: 500; border: 1px solid #2563eb;">
+        <h2 class="subtitle has-text-centered" style="font-size: 1.1rem; line-height: 1.6; color: #4a4a4a; margin-bottom: 0;">
+        Our method still suffers from artifacts such as temporal discontinuities (row 1) and incorrect grounding (row 2) for some cases. We observe that the model accuracy grows as the repeat times increase.
+      </h2>
+      </div>
+      <div style="border: 1px solid #dbdbdb; border-radius: 6px; padding: 1.5rem; margin-bottom: 2rem; background-color: #f8f9fa;">
+      <div class="has-text-centered" style="margin-bottom: 1rem;">
+        <button class="button is-link is-light is-small is-rounded" onclick="playVideosInContainer('failure-cases-group-1')">
+          <span class="icon"><i class="fas fa-play"></i></span>
+          <span>Play All</span>
+        </button>
+      </div>
+
+      <div id="failure-cases-group-1">
+      <div class="columns is-variable is-2 is-vcentered is-centered">
+        <div class="column is-one-quarter">
+          <video poster="assets/failure_cases/context.jpg" id="teaser_left" controls muted style="width:100%; height:auto; border-radius: var(--border-radius);" preload="metadata">
+            <source src="assets/failure_cases/context.mp4" type="video/mp4">
+          </video>
+          <h2 class="subtitle has-text-centered">Context</h2>
+        </div>
+        <div class="column is-one-quarter">
+          <video poster="assets/failure_cases/failure.jpg" id="teaser_right" controls muted style="width:100%; height:auto; border-radius: var(--border-radius);" preload="metadata">
+            <source src="assets/failure_cases/failure.mp4" type="video/mp4">
+          </video>
+          <h2 class="subtitle has-text-centered">Failure Case</h2>
+        </div>
+        <div class="column is-one-quarter">
+          <video poster="assets/failure_cases/success.jpg" id="teaser_right" controls muted style="width:100%; height:auto; border-radius: var(--border-radius);" preload="metadata">
+            <source src="assets/failure_cases/success.mp4" type="video/mp4">
+          </video>
+          <h2 class="subtitle has-text-centered">Success Case</h2>
+        </div>
+      </div>
+      <h2 class="subtitle has-text-centered">
+        Instruction: The camera moves smoothly through a kitchen. Finally, it focuses on a <span class="text-gradient-blue">sink</span> in the center of the frame.
+      </h2>
+      </div>
+      </div>
+      <div style="border: 1px solid #dbdbdb; border-radius: 6px; padding: 1.5rem; margin-bottom: 2rem; background-color: #f8f9fa;">
+      <div class="has-text-centered" style="margin-bottom: 1rem;">
+        <button class="button is-link is-light is-small is-rounded" onclick="playVideosInContainer('failure-cases-group-2')">
+          <span class="icon"><i class="fas fa-play"></i></span>
+          <span>Play All</span>
+        </button>
+      </div>
+
+      <div id="failure-cases-group-2">
+      <div class="columns is-variable is-2 is-vcentered is-centered">
+        <div class="column is-one-quarter">
+          <video poster="assets/failure_cases/context2.jpg" id="teaser_left" controls muted style="width:100%; height:auto; border-radius: var(--border-radius);" preload="metadata">
+            <source src="assets/failure_cases/context2.mp4" type="video/mp4">
+          </video>
+          <h2 class="subtitle has-text-centered">Context</h2>
+        </div>
+        <div class="column is-one-quarter">
+          <video poster="assets/failure_cases/failure2.jpg" id="teaser_right" controls muted style="width:100%; height:auto; border-radius: var(--border-radius);" preload="metadata">
+            <source src="assets/failure_cases/failure2.mp4" type="video/mp4">
+          </video>
+          <h2 class="subtitle has-text-centered">Failure Case</h2>
+        </div>
+        <div class="column is-one-quarter">
+          <video poster="assets/failure_cases/success2.jpg" id="teaser_right" controls muted style="width:100%; height:auto; border-radius: var(--border-radius);" preload="metadata">
+            <source src="assets/failure_cases/success2.mp4" type="video/mp4">
+          </video>
+          <h2 class="subtitle has-text-centered">Success Case</h2>
+        </div>
+      </div>
+      <h2 class="subtitle has-text-centered">
+        Instruction: The camera moves from a desk area. Finally, it focuses on a <span class="text-gradient-blue">suitcase</span> in the center of the frame.
+      </h2>
+      </div>
+      </div>
+  </div>
+</section>
+<!-- End video carousel -->
+
+
+<!-- Out-of-Distribution Generalization -->
+<section class="hero is-small" id="ood">
+  <div class="container is-max-desktop content">
+    <div class="bibtex-header">
+      <br>
+      <h2 class="title">BibTeX</h2>
+      <button class="copy-bibtex-btn" onclick="copyBibTeX()" title="Copy BibTeX to clipboard">
+        <i class="fas fa-copy"></i>
+        <span class="copy-text">Copy</span>
+      </button>
+    </div>
+    <pre id="bibtex-code"><code>@article{YourPaperKey2024,
+title={Your Paper Title Here},
+author={First Author and Second Author and Third Author},
+journal={Conference/Journal Name},
+year={2024},
+url={https://your-domain.com/your-project-page}
+}</code></pre>
+  </div>
+<br>
+</section>
+
+<section class="hero is-light" id="acknowledgements">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title is-3 has-text-centered">Acknowledgements</h2>
+      <div style="background: none; border: none; box-shadow: none; padding: 0;">
+        <h2 class="subtitle has-text-centered" style="font-size: 1.1rem; line-height: 1.6; color: #4a4a4a; margin-bottom: 0;">
+        We are grateful for the insightful discussions and invaluable support provided by Roshni Cooper, Ritwik Kumar, Pablo Delgado, Serhan Uslubas, Avin Regmi, Nilesh Kulkarni, Dan Zheng, Soshi Shimada, 
+        Yihang Luo, Runsen Xu, Yunhao Fang, Xiaohan Mao, Yifan Zhou, Hao Li and Xiao Chen.
+        We thank the great project of <a href="https://github.com/Wan-Video/Wan2.2">Wan</a>, 
+          <a href="https://scannetpp.mlsg.cit.tum.de/scannetpp/">ScanNet++</a>, 
+          <a href="https://github.com/apple/ARKitScenes">ArkitScene</a>, 
+          <a href="https://tianyuanzhang.com/projects/ttt-done-right/">LaCT</a>, 
+          <a href="https://jianhongbai.github.io/ReCamMaster/">ReCamMaster</a>, from which we borrow the insights, data and codebase.
+        The webpage is modified from <a href="eliahuhorwitz.github.io">eliahuhorwitz.github.io</a>.
+
+      </h2>
+      </div>
+  </div>
+</section>
+
+  <script>
+function playVideosInContainer(containerId) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+  const videos = container.querySelectorAll('video');
+  videos.forEach(video => {
+    video.currentTime = 0;
+    video.play();
+  });
+}
+</script>
+</body>
+  </html>
